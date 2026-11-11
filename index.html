@@ -909,6 +909,11 @@
                 { id: 'f4', rawName: 'notes_lecture_3.docx', smartName: 'Syllabus_Real_Estate_Structuring.docx', type: 'document', access: 'public', date: '2026-11-05', size: '820 KB', context: 'School lecture notes on entity formation and asset protection.' }
             ],
             // Tasks State (Loaded from localStorage if available)
+            tasks: JSON.parse(localStorage.getItem('learnwtf_tasks')) || [
+                { id: 't1', title: 'Edit & Publish Episode 42 Podcast Clips', category: 'Podcast', date: '2026-11-11', completed: false, notes: 'Extract 3 viral shorts >= 85% virality.' },
+                { id: 't2', title: 'Complete Corporate Tax Structuring Assignment', category: 'School', date: '2026-11-13', completed: false, notes: 'Review Syllabus_Real_Estate_Structuring.docx in Vault.' },
+                { id: 't3', title: 'Q4 Portfolio Rebalance & Cashflow Audit', category: 'Work', date: '2026-11-15', completed: true, notes: 'Verify dividend yields and treasury allocations.' }
+            ],
             // Viral Shorts State (Includes Full Edited Master + Viral Clips >= 85%)
             uploadedVideoUrl: null,
             uploadedVideoName: 'Masterclass_Finance_Strategy.mp4',
@@ -1580,6 +1585,29 @@
                 showToast(`Generated Full Edited Video + ${generatedList.length - 1} Viral Shorts (>= 85% Virality)!`, "success");
             }, 900);
         }
+
+        function renderStudioShorts() {
+            const container = document.getElementById('shorts-list-container');
+            if (!container) return;
+
+            container.innerHTML = state.viralShorts.map((item, idx) => {
+                const isSelected = idx === state.selectedShortIndex;
+                return `
+                <div onclick="selectShortClip(${idx})" class="p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${isSelected ? 'bg-gold/15 border-gold shadow-lg' : 'bg-obsidian border-panelBorder hover:border-gold/30'}">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg ${item.isMaster ? 'bg-gold/20 text-gold border border-gold/40' : 'bg-crimson/20 text-crimson border border-crimson/40'} flex items-center justify-center shrink-0">
+                            <i class="fa-solid ${item.isMaster ? 'fa-film' : 'fa-fire'} text-xs"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-white">${item.title}</h5>
+                            <p class="text-[10px] text-slate-400 mt-0.5">${item.hook} &bull; <span class="text-gold font-mono">${item.duration}</span></p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-bold shrink-0">${item.virality}% Viral</span>
+                </div>
+                `;
+            }).join('');
+
             // Update Phone/Widescreen Preview & Jump Video Player to Selected Clip Timestamp
             const activeShort = state.viralShorts[state.selectedShortIndex];
             if (activeShort) {
