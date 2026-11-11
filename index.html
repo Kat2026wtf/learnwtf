@@ -1397,7 +1397,8 @@
                 document.getElementById('phone-timecode-display').innerText = `${formatSeconds(elapsed)} / ${formatSeconds(clipDur)}`;
 
                 if (activeClip.captions && activeClip.captions.length > 0) {
-                    const lineIdx = Math.floor(elapsed / 3.5) % activeClip.captions.length;
+                    const chunkDuration = Math.max(1.5, clipDur / activeClip.captions.length);
+                    const lineIdx = Math.min(activeClip.captions.length - 1, Math.floor(elapsed / chunkDuration));
                     updateFormattedSubtitle(activeClip.captions[lineIdx]);
                 }
             };
