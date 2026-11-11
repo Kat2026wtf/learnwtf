@@ -60,12 +60,6 @@
             border-color: rgba(212, 175, 55, 0.6);
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
         }
-        .crimson-glow {
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.35);
-        }
-        .emerald-glow {
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
-        }
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -80,7 +74,6 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #D4AF37;
         }
-        /* Mobile phone mockup wrapper */
         .phone-frame {
             width: 270px;
             height: 480px;
@@ -124,29 +117,28 @@
 
             <!-- Operational Navigation Tabs -->
             <nav class="flex items-center bg-cardBg border border-panelBorder p-1 rounded-2xl gap-1 overflow-x-auto max-w-full custom-scrollbar">
-                <button onclick="switchTab('tab-knowledge')" id="nav-tab-knowledge" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 bg-gold text-obsidian shadow-md">
+                <button type="button" onclick="switchTab('tab-knowledge')" id="nav-tab-knowledge" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 bg-gold text-obsidian shadow-md">
                     <i class="fa-solid fa-vault"></i> <span>Vault & AI</span>
                 </button>
-                <button onclick="switchTab('tab-tasks')" id="nav-tab-tasks" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                <button type="button" onclick="switchTab('tab-tasks')" id="nav-tab-tasks" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
                     <i class="fa-solid fa-calendar-check"></i> <span>Tasks & Calendar</span>
                 </button>
-                <button onclick="switchTab('tab-studio')" id="nav-tab-studio" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                <button type="button" onclick="switchTab('tab-studio')" id="nav-tab-studio" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
                     <i class="fa-solid fa-film"></i> <span>AI Video Studio</span>
                 </button>
-                <button onclick="switchTab('tab-scheduler')" id="nav-tab-scheduler" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                <button type="button" onclick="switchTab('tab-scheduler')" id="nav-tab-scheduler" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
                     <i class="fa-solid fa-share-nodes"></i> <span>Social Publisher</span>
                 </button>
-                <button onclick="switchTab('tab-ideas')" id="nav-tab-ideas" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                <button type="button" onclick="switchTab('tab-ideas')" id="nav-tab-ideas" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
                     <i class="fa-solid fa-lightbulb"></i> <span>Trends & Settings</span>
                 </button>
-                <button onclick="switchTab('tab-cost')" id="nav-tab-cost" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                <button type="button" onclick="switchTab('tab-cost')" id="nav-tab-cost" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
                     <i class="fa-solid fa-calculator"></i> <span>Cost Estimator</span>
                 </button>
             </nav>
 
             <!-- Status Badges & Key Config -->
             <div class="flex items-center gap-3">
-                <!-- Local Storage Status -->
                 <div class="flex items-center gap-2 bg-cardBg border border-emeraldMoney/30 px-3 py-1.5 rounded-full text-xs" title="Local Vault Storage Active">
                     <span class="relative flex h-2 w-2">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emeraldMoney opacity-75"></span>
@@ -156,10 +148,9 @@
                     <span class="text-emeraldMoney font-medium text-[11px]">Local Vault</span>
                 </div>
 
-                <!-- API Key Status Toggle -->
-                <button onclick="openApiKeyModal()" id="apiKeyStatusBtn" class="flex items-center gap-2 bg-cardBg border border-gold/40 hover:border-gold px-3 py-1.5 rounded-full text-xs text-gold transition-all">
+                <button type="button" onclick="openApiKeyModal()" id="apiKeyStatusBtn" class="flex items-center gap-2 bg-cardBg border border-gold/40 hover:border-gold px-3 py-1.5 rounded-full text-xs text-gold transition-all">
                     <i class="fa-solid fa-key"></i>
-                    <span id="apiKeyStatusText" class="font-medium text-[11px]">API: Active</span>
+                    <span id="apiKeyStatusText" class="font-medium text-[11px]">API: Not Set</span>
                 </button>
             </div>
         </div>
@@ -172,7 +163,6 @@
         <!-- TAB 1: KNOWLEDGE HUB & CHATBOT             -->
         <!-- ========================================== -->
         <section id="tab-knowledge" class="tab-content space-y-6">
-            <!-- Header section -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
                 <div>
                     <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-2">
@@ -183,7 +173,7 @@
                 </div>
                 <div class="flex items-center gap-3">
                     <span class="text-xs text-slate-400"><strong class="text-gold" id="file-count-display">4</strong> Files Stored</span>
-                    <button onclick="triggerFileInput()" class="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-obsidian font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
+                    <button type="button" onclick="triggerFileInput()" class="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-obsidian font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
                         <i class="fa-solid fa-cloud-arrow-up"></i> Upload to Vault
                     </button>
                     <input type="file" id="cloudFileInput" class="hidden" multiple onchange="handleFileUpload(event)">
@@ -200,26 +190,22 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Media & Document Explorer (Left 2 Columns) -->
+                <!-- Media & Document Explorer -->
                 <div class="lg:col-span-2 space-y-4">
-                    <!-- Media Type Filter Sub-Tabs -->
                     <div class="flex items-center justify-between border-b border-panelBorder pb-2">
-                        <div class="flex gap-2">
-                            <button onclick="filterVault('all')" id="vault-filter-all" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-gold/20 text-gold border border-gold/40">All Files</button>
-                            <button onclick="filterVault('mp3')" id="vault-filter-mp3" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Audio (.MP3)</button>
-                            <button onclick="filterVault('mp4')" id="vault-filter-mp4" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Videos (.MP4)</button>
-                            <button onclick="filterVault('picture')" id="vault-filter-picture" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Pictures</button>
-                            <button onclick="filterVault('document')" id="vault-filter-document" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Documents</button>
+                        <div class="flex gap-2 flex-wrap">
+                            <button type="button" onclick="filterVault('all')" id="vault-filter-all" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-gold/20 text-gold border border-gold/40">All Files</button>
+                            <button type="button" onclick="filterVault('mp3')" id="vault-filter-mp3" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Audio (.MP3)</button>
+                            <button type="button" onclick="filterVault('mp4')" id="vault-filter-mp4" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Videos (.MP4)</button>
+                            <button type="button" onclick="filterVault('picture')" id="vault-filter-picture" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Pictures</button>
+                            <button type="button" onclick="filterVault('document')" id="vault-filter-document" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Documents</button>
                         </div>
                     </div>
 
-                    <!-- File List Display -->
-                    <div id="vault-file-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
-                        <!-- File item cards populated via JS -->
-                    </div>
+                    <div id="vault-file-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar"></div>
                 </div>
 
-                <!-- AI Knowledge Chatbot Side Panel (Right 1 Column) -->
+                <!-- AI Knowledge Chatbot Side Panel -->
                 <div class="bg-cardBg border border-panelBorder rounded-2xl p-4 flex flex-col h-[560px] shadow-xl">
                     <div class="flex items-center justify-between border-b border-panelBorder pb-3 mb-3">
                         <div class="flex items-center gap-2">
@@ -234,7 +220,6 @@
                         <span class="text-[10px] bg-gold/10 text-gold border border-gold/30 px-2 py-0.5 rounded-full">RAG Enabled</span>
                     </div>
 
-                    <!-- Chat Messages Box -->
                     <div id="chat-messages" class="flex-grow overflow-y-auto space-y-3 custom-scrollbar pr-2 mb-3">
                         <div class="bg-panelBorder/50 rounded-xl p-3 border border-panelBorder/80 text-xs">
                             <p class="text-gold font-semibold mb-1"><i class="fa-solid fa-sparkles"></i> LearnWTF Vault AI</p>
@@ -242,7 +227,6 @@
                         </div>
                     </div>
 
-                    <!-- Chat Input -->
                     <form onsubmit="handleVaultChat(event)" class="flex gap-2 pt-2 border-t border-panelBorder">
                         <input type="text" id="chat-input-field" placeholder="Ask your public knowledge base..." class="flex-grow bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold transition-colors">
                         <button type="submit" class="px-4 py-2 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl transition-all">
@@ -257,7 +241,6 @@
         <!-- TAB 2: TASK MANAGER & CALENDAR            -->
         <!-- ========================================== -->
         <section id="tab-tasks" class="tab-content space-y-6 hidden">
-            <!-- Header section -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
                 <div>
                     <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
@@ -268,37 +251,30 @@
                             <span class="px-2 py-0.5 rounded bg-crimson/20 text-crimson border border-crimson/40">Podcast</span>
                         </div>
                     </h2>
-                    <p class="text-xs text-slate-400">Organize luxury workflows, school projects, and podcast production schedules.</p>
+                    <p class="text-xs text-slate-400">Organize workflows, school projects, and podcast production schedules.</p>
                 </div>
-                <button onclick="openAddTaskModal()" class="px-4 py-2 bg-gradient-to-r from-emeraldMoney to-teal-700 text-white font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 hover:brightness-110 transition-all">
+                <button type="button" onclick="openAddTaskModal()" class="px-4 py-2 bg-gradient-to-r from-emeraldMoney to-teal-700 text-white font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 hover:brightness-110 transition-all">
                     <i class="fa-solid fa-plus"></i> Add New Task
                 </button>
             </div>
 
-            <!-- Task List & Interactive Calendar Split View -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Task Management Board (7 cols) -->
                 <div class="lg:col-span-7 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl space-y-4">
                     <div class="flex items-center justify-between border-b border-panelBorder pb-3">
                         <h3 class="font-serif font-bold text-gold text-lg flex items-center gap-2">
                             <i class="fa-solid fa-list-check"></i> Operational Queue
                         </h3>
-                        <!-- Filter categories -->
                         <div class="flex gap-1">
-                            <button onclick="filterTasks('all')" class="task-filter-btn px-2.5 py-1 rounded text-xs bg-gold/20 text-gold border border-gold/30">All</button>
-                            <button onclick="filterTasks('Work')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-gold">Work</button>
-                            <button onclick="filterTasks('School')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-emeraldMoney">School</button>
-                            <button onclick="filterTasks('Podcast')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-crimson">Podcast</button>
+                            <button type="button" onclick="filterTasks('all')" class="task-filter-btn px-2.5 py-1 rounded text-xs bg-gold/20 text-gold border border-gold/30">All</button>
+                            <button type="button" onclick="filterTasks('Work')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-gold">Work</button>
+                            <button type="button" onclick="filterTasks('School')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-emeraldMoney">School</button>
+                            <button type="button" onclick="filterTasks('Podcast')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-crimson">Podcast</button>
                         </div>
                     </div>
 
-                    <!-- Tasks List Container -->
-                    <div id="tasks-container" class="space-y-3 max-h-[460px] overflow-y-auto pr-1 custom-scrollbar">
-                        <!-- Task items generated via JS -->
-                    </div>
+                    <div id="tasks-container" class="space-y-3 max-h-[460px] overflow-y-auto pr-1 custom-scrollbar"></div>
                 </div>
 
-                <!-- Interactive Calendar Widget (5 cols) -->
                 <div class="lg:col-span-5 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4 border-b border-panelBorder pb-3">
@@ -308,26 +284,19 @@
                             <span class="text-xs text-gold font-semibold" id="calendar-month-year">November 2026</span>
                         </div>
                         
-                        <!-- Weekday Headers -->
                         <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-slate-400 mb-2">
                             <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
                         </div>
 
-                        <!-- Calendar Grid -->
-                        <div id="calendar-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs">
-                            <!-- Populated via JS -->
-                        </div>
+                        <div id="calendar-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs"></div>
                     </div>
 
-                    <!-- Selected Day Tasks Detail Panel -->
                     <div class="mt-4 pt-3 border-t border-panelBorder">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
                             <span class="font-bold text-white">Upcoming Deadlines</span>
                             <span class="text-emeraldMoney"><i class="fa-solid fa-circle text-[8px]"></i> Real-Time Synced</span>
                         </div>
-                        <div id="calendar-deadlines-preview" class="space-y-2 text-xs">
-                            <!-- Deadlines populated dynamically -->
-                        </div>
+                        <div id="calendar-deadlines-preview" class="space-y-2 text-xs"></div>
                     </div>
                 </div>
             </div>
@@ -337,7 +306,6 @@
         <!-- TAB 3: AI VIDEO STUDIO & VIRAL CLIPPER     -->
         <!-- ========================================== -->
         <section id="tab-studio" class="tab-content space-y-6 hidden">
-            <!-- Header section -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
                 <div>
                     <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
@@ -349,25 +317,22 @@
                     <p class="text-xs text-slate-400">Processes videos up to 2 hrs. Auto-strips silences, cuts multi-cam angles, and isolates top vertical shorts.</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="triggerStudioUpload()" class="px-4 py-2 bg-crimson hover:bg-crimson-glow text-white font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
+                    <button type="button" onclick="triggerStudioUpload()" class="px-4 py-2 bg-crimson hover:bg-crimson-glow text-white font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
                         <i class="fa-solid fa-video"></i> Import Raw Video (Up to 2h)
                     </button>
                     <input type="file" id="studioFileInput" accept="video/mp4,video/*" class="hidden" onchange="handleStudioUpload(event)">
                 </div>
             </div>
 
-            <!-- Studio Control & Preview Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
-                <!-- Left Control Panel & Processing Specs (4 Cols) -->
+                <!-- Left Control Panel -->
                 <div class="lg:col-span-4 space-y-4">
-                    <!-- Processing Controls Card -->
                     <div class="bg-cardBg border border-panelBorder rounded-2xl p-4 space-y-4 shadow-xl">
                         <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-2 flex items-center gap-2">
                             <i class="fa-solid fa-sliders"></i> Smart Editing Parameters
                         </h3>
 
-                        <!-- Cut Silences Slider -->
                         <div class="space-y-1">
                             <div class="flex justify-between text-xs">
                                 <span class="text-slate-300">Silence Removal Threshold</span>
@@ -376,7 +341,6 @@
                             <input type="range" class="w-full accent-gold bg-obsidian rounded-lg h-1.5 cursor-pointer" min="1" max="100" value="75">
                         </div>
 
-                        <!-- Options toggles -->
                         <div class="space-y-2 text-xs">
                             <label class="flex items-center justify-between cursor-pointer p-2 rounded-lg bg-obsidian border border-panelBorder hover:border-gold/30">
                                 <span>Auto Multi-Cam Angle Cuts</span>
@@ -392,8 +356,7 @@
                             </label>
                         </div>
 
-                        <!-- Action trigger -->
-                        <button onclick="runStudioClipper()" id="runClipperBtn" class="w-full py-3 bg-gradient-to-r from-gold via-yellow-500 to-gold-dark hover:brightness-110 text-obsidian font-extrabold text-xs rounded-xl shadow-xl flex items-center justify-center gap-2 transition-all uppercase tracking-wider">
+                        <button type="button" onclick="runStudioClipper()" id="runClipperBtn" class="w-full py-3 bg-gradient-to-r from-gold via-yellow-500 to-gold-dark hover:brightness-110 text-obsidian font-extrabold text-xs rounded-xl shadow-xl flex items-center justify-center gap-2 transition-all uppercase tracking-wider">
                             <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Viral Shorts & Full Video
                         </button>
                     </div>
@@ -411,7 +374,7 @@
                         </div>
 
                         <form onsubmit="handleVideoEditPrompt(event)" class="flex gap-2">
-                            <input type="text" id="video-edit-input" placeholder="e.g. Add gold captions with emerald highlight" class="flex-grow bg-obsidian border border-panelBorder rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-gold">
+                            <input type="text" id="video-edit-input" placeholder="e.g. Make captions gold or emerald" class="flex-grow bg-obsidian border border-panelBorder rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-gold">
                             <button type="submit" class="px-3 py-1.5 bg-panelBorder hover:bg-gold text-slate-200 hover:text-obsidian rounded-xl text-xs font-bold transition-all">
                                 Send
                             </button>
@@ -419,60 +382,47 @@
                     </div>
                 </div>
 
-                <!-- Right Video Preview Stage (8 Cols) -->
+                <!-- Right Video Preview Stage -->
                 <div class="lg:col-span-8 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl flex flex-col justify-between space-y-6">
-                    
-                    <!-- Main Video Player Stage -->
                     <div>
                         <div class="flex items-center justify-between border-b border-panelBorder pb-3 mb-4">
                             <div class="flex items-center gap-3">
-                                <h3 class="font-serif font-bold text-white text-lg" id="current-preview-title">Full Master Video (Edited)</h3>
-                                <span class="px-2 py-0.5 rounded-full text-[10px] bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-bold" id="preview-virality-badge">Virality Score: 94%</span>
+                                <h3 class="font-serif font-bold text-white text-lg" id="current-preview-title">Stop Saving Paper Money (The Inflation Trap)</h3>
+                                <span class="px-2 py-0.5 rounded-full text-[10px] bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-bold" id="preview-virality-badge">Virality Score: 95%</span>
                             </div>
-                            <span class="text-xs text-slate-400 font-mono" id="current-preview-duration">Duration: 42:15</span>
+                            <span class="text-xs text-slate-400 font-mono" id="current-preview-duration">Duration: 00:45</span>
                         </div>
 
-                        <!-- Player Container with simulated media frame -->
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                            
-                            <!-- Adaptive Phone / Widescreen Frame Mockup -->
+                            <!-- Adaptive Phone / Widescreen Frame -->
                             <div class="md:col-span-5 flex flex-col items-center justify-center">
                                 <div id="studio-frame-wrapper" class="phone-frame flex flex-col justify-between p-3 group transition-all duration-300">
                                     <div id="studio-phone-notch" class="phone-notch"></div>
-                                    <!-- Dynamic Video Simulation Canvas / Real HTML5 Video Player -->
                                     <div id="phone-screen-content" onclick="toggleStudioVideoPlay()" class="h-full w-full rounded-2xl bg-gradient-to-b from-zinc-900 via-obsidian to-black border border-gold/20 flex flex-col justify-between p-3 relative overflow-hidden mt-1 cursor-pointer select-none">
-                                        <!-- Real HTML5 Video Element -->
                                         <video id="studio-video-player" class="hidden absolute inset-0 w-full h-full object-cover z-0" playsinline loop></video>
-                                        <!-- Animated video bar overlay (Fallback when no video uploaded) -->
                                         <div id="studio-video-bg-pattern" class="absolute inset-0 opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px] animate-pulse"></div>
                                         
-                                        <!-- Subtle Top & Bottom Gradient Vignettes for Clean Readability -->
                                         <div class="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/70 to-transparent pointer-events-none z-10"></div>
                                         <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none z-10"></div>
 
-                                        <!-- Top Minimal Metadata Bar -->
                                         <div class="flex justify-between items-center z-20 pt-2">
-                                            <span id="phone-clip-badge" class="bg-crimson/90 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow">🔥 Viral Short</span>
-                                            <span id="phone-views-badge" class="text-[10px] text-gold font-bold bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full border border-gold/20"><i class="fa-solid fa-eye"></i> 850k+</span>
+                                            <span id="phone-clip-badge" class="bg-crimson/90 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow">🔥 Viral Short (9:16)</span>
+                                            <span id="phone-views-badge" class="text-[10px] text-gold font-bold bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full border border-gold/20"><i class="fa-solid fa-eye"></i> 1.2M+</span>
                                         </div>
 
-                                        <!-- Center Play/Pause Button (Auto-hides while playing so face is never blocked) -->
                                         <div id="studio-center-controls" class="z-20 my-auto flex items-center justify-center transition-opacity duration-200">
                                             <div id="studio-play-btn" class="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md hover:bg-gold border border-gold/70 text-gold hover:text-obsidian flex items-center justify-center shadow-2xl transition-all transform hover:scale-110">
                                                 <i id="studio-play-icon" class="fa-solid fa-play text-base ml-0.5"></i>
                                             </div>
                                         </div>
 
-                                        <!-- Lower-Third Dynamic Viral Captions & Progress Bar -->
                                         <div class="z-20 space-y-2.5">
-                                            <!-- Clean Viral Subtitle (No bulky dark box covering face) -->
                                             <div id="phone-caption-container" class="text-center px-2">
                                                 <span id="phone-caption-preview" class="inline-block text-sm font-black text-white uppercase tracking-wide leading-snug" style="text-shadow: 0 2px 10px rgba(0,0,0,0.95), 0 0 2px #000, 1px 1px 0 #000, -1px -1px 0 #000;">
-                                                    STOP SAVING <span class="text-gold">PAPER MONEY</span> IN 2026
+                                                    STOP SAVING <span class="text-gold">PAPER</span> MONEY
                                                 </span>
                                             </div>
 
-                                            <!-- Sleek Scrubber & Timecode -->
                                             <div onclick="event.stopPropagation()" class="space-y-1 pt-1">
                                                 <div class="flex items-center justify-between text-[10px] text-slate-300 px-0.5">
                                                     <span class="font-semibold text-white/90">@LearnWTF</span>
@@ -497,19 +447,16 @@
                                     <span id="studio-source-status" class="text-[10px] text-gold font-mono">Demo Master Loaded</span>
                                 </div>
 
-                                <div id="shorts-list-container" class="space-y-2.5 max-h-[360px] overflow-y-auto pr-1 custom-scrollbar">
-                                    <!-- Viral Shorts item cards populated via JS -->
-                                </div>
+                                <div id="shorts-list-container" class="space-y-2.5 max-h-[360px] overflow-y-auto pr-1 custom-scrollbar"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Action Bar: Export to Tab 4 & Download -->
                     <div class="pt-4 border-t border-panelBorder flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <button onclick="downloadCurrentVideo()" class="w-full sm:w-auto px-4 py-2.5 bg-panelBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
+                        <button type="button" onclick="downloadCurrentVideo()" class="w-full sm:w-auto px-4 py-2.5 bg-panelBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
                             <i class="fa-solid fa-download"></i> Download Video File
                         </button>
-                        <button onclick="transferToScheduler()" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-emeraldMoney to-teal-600 hover:brightness-110 text-white rounded-xl text-xs font-extrabold shadow-xl flex items-center justify-center gap-2 transition-all tracking-wider uppercase">
+                        <button type="button" onclick="transferToScheduler()" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-emeraldMoney to-teal-600 hover:brightness-110 text-white rounded-xl text-xs font-extrabold shadow-xl flex items-center justify-center gap-2 transition-all tracking-wider uppercase">
                             <i class="fa-solid fa-paper-plane"></i> Export Selected Clip to Tab 4 Post Scheduler
                         </button>
                     </div>
@@ -521,7 +468,6 @@
         <!-- TAB 4: MULTI-PLATFORM AUTO-SCHEDULER       -->
         <!-- ========================================== -->
         <section id="tab-scheduler" class="tab-content space-y-6 hidden">
-            <!-- Header section -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
                 <div>
                     <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
@@ -530,12 +476,10 @@
                     </h2>
                     <p class="text-xs text-slate-400">Connect accounts, automatically generate viral captions/hashtags, and schedule or publish immediately.</p>
                 </div>
-                <span class="text-xs text-slate-400" id="queue-count-badge"><strong>3</strong> Clips Queued for Posting</span>
+                <span class="text-xs text-slate-400" id="queue-count-badge"><strong>2</strong> Clips Queued for Posting</span>
             </div>
 
-            <!-- Connected Accounts Toggle Cards -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <!-- TikTok -->
                 <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
                     <div class="flex items-center gap-2.5">
                         <i class="fa-brands fa-tiktok text-pink-500 text-xl"></i>
@@ -546,7 +490,6 @@
                     </div>
                     <input type="checkbox" checked onchange="toggleAccount('tiktok')" class="accent-gold w-4 h-4 cursor-pointer">
                 </div>
-                <!-- Instagram -->
                 <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
                     <div class="flex items-center gap-2.5">
                         <i class="fa-brands fa-instagram text-rose-500 text-xl"></i>
@@ -557,7 +500,6 @@
                     </div>
                     <input type="checkbox" checked onchange="toggleAccount('instagram')" class="accent-gold w-4 h-4 cursor-pointer">
                 </div>
-                <!-- YouTube Shorts -->
                 <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
                     <div class="flex items-center gap-2.5">
                         <i class="fa-brands fa-youtube text-red-600 text-xl"></i>
@@ -568,7 +510,6 @@
                     </div>
                     <input type="checkbox" checked onchange="toggleAccount('youtube')" class="accent-gold w-4 h-4 cursor-pointer">
                 </div>
-                <!-- Facebook Reels -->
                 <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
                     <div class="flex items-center gap-2.5">
                         <i class="fa-brands fa-facebook text-blue-500 text-xl"></i>
@@ -581,31 +522,25 @@
                 </div>
             </div>
 
-            <!-- Queue & Publisher Editor Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Video Post List / Queue (5 cols) -->
                 <div class="lg:col-span-5 bg-cardBg border border-panelBorder rounded-2xl p-4 space-y-3 shadow-xl">
                     <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-2 flex items-center justify-between">
                         <span><i class="fa-solid fa-list-ul"></i> Pending Video Queue</span>
                         <span class="text-xs text-slate-400 font-sans">Tab 3 Imports</span>
                     </h3>
-                    <div id="publisher-queue-list" class="space-y-3 max-h-[460px] overflow-y-auto pr-1 custom-scrollbar">
-                        <!-- Queue items rendered via JS -->
-                    </div>
+                    <div id="publisher-queue-list" class="space-y-3 max-h-[460px] overflow-y-auto pr-1 custom-scrollbar"></div>
                 </div>
 
-                <!-- Active Post Detail & Caption Generator (7 cols) -->
                 <div class="lg:col-span-7 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl space-y-4">
                     <div class="flex items-center justify-between border-b border-panelBorder pb-3">
                         <h3 class="font-serif font-bold text-white text-base flex items-center gap-2">
                             <i class="fa-solid fa-pen-to-square text-gold"></i> AI Caption & Hashtag Configuration
                         </h3>
-                        <button onclick="generateFreshCaptions()" class="px-3 py-1 bg-gold/20 hover:bg-gold text-gold hover:text-obsidian border border-gold/40 rounded-xl text-xs font-bold transition-all">
+                        <button type="button" onclick="generateFreshCaptions()" class="px-3 py-1 bg-gold/20 hover:bg-gold text-gold hover:text-obsidian border border-gold/40 rounded-xl text-xs font-bold transition-all">
                             <i class="fa-solid fa-rotate"></i> Regenerate AI Captions
                         </button>
                     </div>
 
-                    <!-- Caption Input Area (Formatted for 9:16 mobile screens) -->
                     <div class="space-y-2">
                         <label class="text-xs text-slate-300 font-semibold flex justify-between">
                             <span>Post Caption & Hook</span>
@@ -614,13 +549,11 @@
                         <textarea id="post-caption-input" rows="4" class="w-full bg-obsidian border border-panelBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-gold font-sans leading-relaxed custom-scrollbar" placeholder="Generated viral caption..."></textarea>
                     </div>
 
-                    <!-- Generated Niche Hashtags -->
                     <div class="space-y-2">
                         <label class="text-xs text-slate-300 font-semibold">AI Niche Hashtags</label>
                         <input type="text" id="post-hashtags-input" class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-gold font-mono focus:outline-none focus:border-gold" value="#WealthHacks #FinancialFreedom #LearnWTF #MoneyTok #PassiveIncome">
                     </div>
 
-                    <!-- Scheduling Time & Date Picker -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                         <div>
                             <label class="text-xs text-slate-300 font-semibold block mb-1">Publishing Date</label>
@@ -632,17 +565,16 @@
                         </div>
                     </div>
 
-                    <!-- Action Buttons -->
                     <div class="pt-4 border-t border-panelBorder flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <button onclick="downloadActivePostVideo()" class="w-full sm:w-auto px-4 py-2.5 bg-panelBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
+                        <button type="button" onclick="downloadActivePostVideo()" class="w-full sm:w-auto px-4 py-2.5 bg-panelBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
                             <i class="fa-solid fa-download"></i> Download Video & Reels
                         </button>
 
                         <div class="flex items-center gap-2 w-full sm:w-auto">
-                            <button onclick="schedulePostAction()" class="flex-1 sm:flex-none px-4 py-2.5 bg-gold hover:bg-gold-light text-obsidian font-extrabold rounded-xl text-xs shadow-lg transition-all">
+                            <button type="button" onclick="schedulePostAction()" class="flex-1 sm:flex-none px-4 py-2.5 bg-gold hover:bg-gold-light text-obsidian font-extrabold rounded-xl text-xs shadow-lg transition-all">
                                 <i class="fa-solid fa-clock"></i> Schedule Post
                             </button>
-                            <button onclick="publishNowAction()" class="flex-1 sm:flex-none px-5 py-2.5 bg-crimson hover:bg-crimson-glow text-white font-extrabold rounded-xl text-xs shadow-lg transition-all">
+                            <button type="button" onclick="publishNowAction()" class="flex-1 sm:flex-none px-5 py-2.5 bg-crimson hover:bg-crimson-glow text-white font-extrabold rounded-xl text-xs shadow-lg transition-all">
                                 <i class="fa-solid fa-paper-plane"></i> Post Immediately
                             </button>
                         </div>
@@ -655,36 +587,30 @@
         <!-- TAB 5: NICHE CONTENT IDEAS & API CONFIG    -->
         <!-- ========================================== -->
         <section id="tab-ideas" class="tab-content space-y-6 hidden">
-            <!-- Header section -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
                 <div>
                     <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
                         <span>Niche Content AI Idea Engine & GitHub Setup</span>
                         <span class="text-xs font-sans px-2.5 py-0.5 rounded-full bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-semibold">Zero Host Cost</span>
                     </h2>
-                    <p class="text-xs text-slate-400">Content ideas adjust dynamically as you upload more videos. Configured for private GitHub Pages execution.</p>
+                    <p class="text-xs text-slate-400">Content ideas adjust dynamically as you upload more videos. Configured for GitHub Pages execution.</p>
                 </div>
-                <button onclick="refreshTrendingIdeas()" class="px-4 py-2 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
+                <button type="button" onclick="refreshTrendingIdeas()" class="px-4 py-2 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
                     <i class="fa-solid fa-arrows-rotate"></i> Refresh Niche Trends
                 </button>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Trending Ideas List (7 cols) -->
                 <div class="lg:col-span-7 bg-cardBg border border-panelBorder rounded-2xl p-5 space-y-4 shadow-xl">
                     <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-3 flex items-center justify-between">
                         <span><i class="fa-solid fa-fire text-crimson"></i> Personalized Trending Video Ideas</span>
                         <span class="text-[11px] text-emeraldMoney font-sans font-normal">Adapted from your uploaded content</span>
                     </h3>
 
-                    <div id="trending-ideas-container" class="space-y-3.5 max-h-[480px] overflow-y-auto pr-1 custom-scrollbar">
-                        <!-- Populated via JS -->
-                    </div>
+                    <div id="trending-ideas-container" class="space-y-3.5 max-h-[480px] overflow-y-auto pr-1 custom-scrollbar"></div>
                 </div>
 
-                <!-- API Key & GitHub Pages Privacy Guide (5 cols) -->
                 <div class="lg:col-span-5 space-y-4">
-                    <!-- OpenAI API Key Card -->
                     <div class="bg-cardBg border border-gold/40 rounded-2xl p-5 space-y-3 shadow-xl gold-border-glow">
                         <h3 class="font-serif font-bold text-gold text-base flex items-center gap-2">
                             <i class="fa-solid fa-key"></i> OpenAI ChatGPT API Key
@@ -697,14 +623,13 @@
                             <input type="password" id="tab5-apikey-input" placeholder="sk-proj-..." class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold font-mono">
                             <div class="flex items-center justify-between">
                                 <span class="text-[10px] text-slate-400"><i class="fa-solid fa-shield-halved text-emeraldMoney"></i> Stored in local browser vault</span>
-                                <button onclick="saveApiKeyTab5()" class="px-4 py-1.5 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl transition-all">
+                                <button type="button" onclick="saveApiKeyTab5()" class="px-4 py-1.5 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl transition-all">
                                     Save Key
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- GitHub Pages Private Host Instructions -->
                     <div class="bg-cardBg border border-panelBorder rounded-2xl p-5 space-y-3 shadow-xl">
                         <h3 class="font-serif font-bold text-white text-base flex items-center gap-2">
                             <i class="fa-brands fa-github text-gold"></i> GitHub Pages Host Guide
@@ -713,14 +638,14 @@
                             Run LearnWTF securely with <strong>zero server costs</strong>:
                         </p>
                         <ol class="list-decimal list-inside text-xs text-slate-400 space-y-2 pl-1">
-                            <li>Create a private repository on <strong class="text-white">GitHub.com</strong> named <code class="text-gold font-mono">learnwtf-app</code>.</li>
+                            <li>Create a repository on <strong class="text-white">GitHub.com</strong> named <code class="text-gold font-mono">learnwtf</code>.</li>
                             <li>Upload this <code class="text-gold font-mono">index.html</code> file to the root of the repository.</li>
                             <li>Navigate to <strong>Settings &rarr; Pages</strong> and select <em>main branch / root</em>.</li>
-                            <li>Your app will be live at <code class="text-emeraldMoney font-mono">https://username.github.io/learnwtf-app</code>.</li>
+                            <li>Your app will be live at <code class="text-emeraldMoney font-mono">https://username.github.io/learnwtf</code>.</li>
                         </ol>
                         <div class="p-2.5 rounded-xl bg-obsidian border border-emeraldMoney/30 text-[11px] text-emeraldMoney flex items-center gap-2 mt-2">
                             <i class="fa-solid fa-lock text-sm"></i>
-                            <span>All uploads and data stay safely saved in your personal browser vault.</span>
+                            <span>Your API key stays safely hidden in your personal browser storage.</span>
                         </div>
                     </div>
                 </div>
@@ -731,7 +656,6 @@
         <!-- TAB 6: REAL-TIME COST ESTIMATOR            -->
         <!-- ========================================== -->
         <section id="tab-cost" class="tab-content space-y-6 hidden">
-            <!-- Header section -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
                 <div>
                     <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
@@ -745,14 +669,12 @@
                 <div class="flex items-center gap-3">
                     <div class="bg-cardBg border border-emeraldMoney/40 px-3 py-1.5 rounded-xl text-xs">
                         <span class="text-slate-400">Estimated SaaS Savings: </span>
-                        <strong class="text-emeraldMoney font-mono text-sm" id="header-monthly-savings">$68.45/mo</strong>
+                        <strong class="text-emeraldMoney font-mono text-sm" id="header-monthly-savings">$70.45/mo</strong>
                     </div>
                 </div>
             </div>
 
-            <!-- Cost Calculator Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Interactive Controls (7 cols) -->
                 <div class="lg:col-span-7 space-y-4">
                     <div class="bg-cardBg border border-panelBorder rounded-2xl p-5 space-y-5 shadow-xl">
                         <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-2 flex items-center justify-between">
@@ -760,7 +682,6 @@
                             <span class="text-[11px] font-sans text-slate-400">Adjust parameters</span>
                         </h3>
 
-                        <!-- AI Model Picker -->
                         <div class="space-y-1">
                             <label class="text-xs text-slate-300 font-semibold flex justify-between">
                                 <span>Primary Chat Model</span>
@@ -773,7 +694,6 @@
                             </select>
                         </div>
 
-                        <!-- Video Minutes Slider (Whisper AI) -->
                         <div class="space-y-2">
                             <div class="flex justify-between text-xs">
                                 <span class="text-slate-300 font-semibold"><i class="fa-solid fa-microphone-lines text-gold"></i> Monthly Video/Audio Processed (Whisper AI)</span>
@@ -787,7 +707,6 @@
                             </div>
                         </div>
 
-                        <!-- Knowledge Vault RAG Queries -->
                         <div class="space-y-2">
                             <div class="flex justify-between text-xs">
                                 <span class="text-slate-300 font-semibold"><i class="fa-solid fa-comments text-gold"></i> Monthly AI Vault Chat Prompts</span>
@@ -796,7 +715,6 @@
                             <input type="range" id="promptsInput" min="0" max="1000" value="150" step="10" oninput="calculateCosts()" class="w-full accent-gold bg-obsidian rounded-lg h-2 cursor-pointer">
                         </div>
 
-                        <!-- Viral Shorts Generated -->
                         <div class="space-y-2">
                             <div class="flex justify-between text-xs">
                                 <span class="text-slate-300 font-semibold"><i class="fa-solid fa-scissors text-crimson"></i> Monthly Viral Shorts & Captions Generated</span>
@@ -805,19 +723,16 @@
                             <input type="range" id="shortsCountInput" min="0" max="200" value="25" step="5" oninput="calculateCosts()" class="w-full accent-crimson bg-obsidian rounded-lg h-2 cursor-pointer">
                         </div>
 
-                        <!-- Preset Buttons -->
                         <div class="pt-2 border-t border-panelBorder flex items-center gap-2">
                             <span class="text-[11px] text-slate-400">Quick Presets:</span>
-                            <button onclick="setCostPreset('casual')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Casual Creator</button>
-                            <button onclick="setCostPreset('pro')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Pro Podcaster</button>
-                            <button onclick="setCostPreset('agency')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Media Agency</button>
+                            <button type="button" onclick="setCostPreset('casual')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Casual Creator</button>
+                            <button type="button" onclick="setCostPreset('pro')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Pro Podcaster</button>
+                            <button type="button" onclick="setCostPreset('agency')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Media Agency</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Breakdown & SaaS Comparison (5 cols) -->
                 <div class="lg:col-span-5 space-y-4">
-                    <!-- Total Estimated Cost Card -->
                     <div class="bg-cardBg border border-gold/40 rounded-2xl p-5 shadow-xl gold-border-glow space-y-4">
                         <div class="flex items-center justify-between border-b border-panelBorder pb-3">
                             <h3 class="font-serif font-bold text-white text-base">Estimated Direct API Cost</h3>
@@ -829,7 +744,6 @@
                             <p class="text-xs text-slate-400 mt-1">Per Month (Estimated OpenAI Token Usage)</p>
                         </div>
 
-                        <!-- Per-Feature Cost Breakdown -->
                         <div class="space-y-2 text-xs bg-obsidian p-3 rounded-xl border border-panelBorder">
                             <div class="flex justify-between">
                                 <span class="text-slate-400"><i class="fa-solid fa-microphone text-gold"></i> Whisper Audio Transcription:</span>
@@ -846,7 +760,6 @@
                         </div>
                     </div>
 
-                    <!-- SaaS Comparison Card -->
                     <div class="bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl space-y-3">
                         <h3 class="font-serif font-bold text-emeraldMoney text-base flex items-center justify-between">
                             <span><i class="fa-solid fa-scale-balanced"></i> Traditional SaaS vs LearnWTF</span>
@@ -890,34 +803,96 @@
     </main>
 
     <!-- FOOTER -->
-<!-- ... existing code me ... -->
+    <footer class="border-t border-panelBorder/80 bg-obsidian py-4 px-4 sm:px-8 text-center text-[11px] text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p>&copy; 2026 <strong class="text-gold">LearnWTF</strong>. Private Client-Side Workspace.</p>
+            <p>Zero Server Cost &bull; Local Browser Vault Persistence</p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MODALS & TOAST NOTIFICATIONS               -->
+    <!-- ========================================== -->
+    <!-- API Key Modal -->
+    <div id="apiKeyModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-gold/50 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-panelBorder pb-3">
+                <h3 class="font-serif font-bold text-gold text-lg flex items-center gap-2"><i class="fa-solid fa-key"></i> OpenAI API Configuration</h3>
+                <button type="button" onclick="closeApiKeyModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">Enter your personal OpenAI API Key. It stays stored exclusively in your browser's local cache and is never shared publicly.</p>
+            <input type="password" id="modalApiKeyInput" placeholder="sk-proj-..." class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-gold font-mono">
+            <div class="flex justify-end gap-2 pt-2">
+                <button type="button" onclick="closeApiKeyModal()" class="px-4 py-2 bg-panelBorder text-slate-300 rounded-xl text-xs font-bold">Cancel</button>
+                <button type="button" onclick="saveApiKeyModal()" class="px-5 py-2 bg-gold hover:bg-gold-light text-obsidian rounded-xl text-xs font-extrabold">Save Key</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="addTaskModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-emeraldMoney/50 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-panelBorder pb-3">
+                <h3 class="font-serif font-bold text-white text-lg flex items-center gap-2"><i class="fa-solid fa-plus text-emeraldMoney"></i> Create New Task</h3>
+                <button type="button" onclick="closeAddTaskModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleCreateTaskSubmit(event)" class="space-y-3">
+                <div>
+                    <label class="text-xs text-slate-300 font-semibold block mb-1">Task Title</label>
+                    <input type="text" id="newTaskTitle" required placeholder="e.g. Record Podcast Intro" class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-slate-300 font-semibold block mb-1">Category</label>
+                        <select id="newTaskCategory" class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold">
+                            <option value="Work">Work</option>
+                            <option value="School">School</option>
+                            <option value="Podcast">Podcast</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-300 font-semibold block mb-1">Due Date</label>
+                        <input type="date" id="newTaskDate" value="2026-11-14" required class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs text-slate-300 font-semibold block mb-1">Notes</label>
+                    <textarea id="newTaskNotes" rows="2" placeholder="Optional details..." class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeAddTaskModal()" class="px-4 py-2 bg-panelBorder text-slate-300 rounded-xl text-xs font-bold">Cancel</button>
+                    <button type="submit" class="px-5 py-2 bg-emeraldMoney text-obsidian rounded-xl text-xs font-extrabold">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
     <!-- ========================================== -->
     <!-- JAVASCRIPT LOGIC & STATE ENGINE           -->
     <!-- ========================================== -->
     <script>
-        // GLOBAL APP STATE
         const state = {
             apiKey: localStorage.getItem('learnwtf_api_key') || '',
             activeTab: 'tab-knowledge',
             activeVaultFilter: 'all',
             activeTaskFilter: 'all',
-            // Pre-populated Vault Files (Loaded from localStorage if available)
             vaultFiles: JSON.parse(localStorage.getItem('learnwtf_vault_files')) || [
                 { id: 'f1', rawName: 'podcast_raw_01.mp3', smartName: 'Episode_42_Wealth_Hacks.mp3', type: 'mp3', access: 'public', date: '2026-11-08', size: '48.2 MB', context: 'Deep dive into passive income streams and asset allocation strategy.' },
                 { id: 'f2', rawName: 'video_shoot_final.mp4', smartName: 'Masterclass_Finance_Strategy_v1.mp4', type: 'mp4', access: 'public', date: '2026-11-09', size: '1.2 GB', duration: '01:42:15', context: '2 hour lecture covering market psychology and option leverage.' },
-                { id: 'f3', rawName: 'IMG_8842.png', smartName: 'Luxury_Portfolio_Breakdown_Graph.png', type: 'picture', access: 'private', date: '2026-11-07', size: '4.1 MB', context: 'Infographic of asset distribution.' },
+                { id: 'f3', rawName: 'IMG_8842.png', smartName: 'Portfolio_Breakdown_Graph.png', type: 'picture', access: 'private', date: '2026-11-07', size: '4.1 MB', context: 'Infographic of asset distribution.' },
                 { id: 'f4', rawName: 'notes_lecture_3.docx', smartName: 'Syllabus_Real_Estate_Structuring.docx', type: 'document', access: 'public', date: '2026-11-05', size: '820 KB', context: 'School lecture notes on entity formation and asset protection.' }
             ],
-            // Tasks State (Loaded from localStorage if available)
             tasks: JSON.parse(localStorage.getItem('learnwtf_tasks')) || [
                 { id: 't1', title: 'Edit & Publish Episode 42 Podcast Clips', category: 'Podcast', date: '2026-11-11', completed: false, notes: 'Extract 3 viral shorts >= 85% virality.' },
                 { id: 't2', title: 'Complete Corporate Tax Structuring Assignment', category: 'School', date: '2026-11-13', completed: false, notes: 'Review Syllabus_Real_Estate_Structuring.docx in Vault.' },
                 { id: 't3', title: 'Q4 Portfolio Rebalance & Cashflow Audit', category: 'Work', date: '2026-11-15', completed: true, notes: 'Verify dividend yields and treasury allocations.' }
             ],
-            // Viral Shorts State (Includes Full Edited Master + Viral Clips >= 85%)
             uploadedVideoUrl: null,
             uploadedVideoName: 'Masterclass_Finance_Strategy.mp4',
-            uploadedVideoDurationSec: 2535, // 42m 15s default
+            uploadedVideoDurationSec: 2535,
             isVideoPlaying: false,
             captionStyleColor: 'gold',
             viralShorts: [
@@ -927,33 +902,33 @@
                 { id: 's3', isMaster: false, title: 'How To Build a 7-Figure Portfolio in College', virality: 88, duration: '00:52', startTime: 103, endTime: 155, hook: 'Strong Student Relevance', viewsEst: '620K+', captions: ['START BUILDING WEALTH IN COLLEGE', 'COMPOUND INTEREST IS YOUR EDGE', 'FOLLOW FOR DAILY PLAYBOOKS'] }
             ],
             selectedShortIndex: 1,
-            // Publisher Queue
             publisherQueue: [
                 { id: 'pq1', title: 'Stop Saving Paper Money (The Inflation Trap)', virality: 95, caption: '🚨 Paper money is losing value every single day. Here is how top investors store wealth instead. Save this clip before it gets taken down! 💸🔥', hashtags: '#LearnWTF #FinancialFreedom #WealthHacks #MoneyTok #Investing' },
-                { id: 'pq2', title: '3 Tax Secrets Ultra-Rich People Use', virality: 92, caption: 'Legally lower your tax burden with these 3 entity strategies taught in top finance schools. 📈🏆', hashtags: '#TaxHacks #RealEstate #BusinessOwner #SeductiveFinance' }
+                { id: 'pq2', title: '3 Tax Secrets Ultra-Rich People Use', virality: 92, caption: 'Legally lower your tax burden with these 3 entity strategies taught in top finance schools. 📈🏆', hashtags: '#TaxHacks #RealEstate #BusinessOwner #WealthStrategy' }
             ],
             selectedQueueIndex: 0,
-            // Trending Ideas
             trendingIdeas: [
                 { id: 'i1', title: 'Why 90% of College Grads Fail at Wealth Building', category: 'School & Finance', trendScore: '98% Trending', scriptHook: '"They teach you calculus, but never taught you how to read a balance sheet..."' },
                 { id: 'i2', title: 'How to Launch a Podcast that Monetizes on Day 1', category: 'Podcast Masterclass', trendScore: '94% Trending', scriptHook: '"Sponsorships are dead. Here is the modern high-ticket affiliate funnel..."' },
-                { id: 'i3', title: 'The 3-Asset Portfolio for Seductive Financial Freedom', category: 'Luxury Work', trendScore: '91% Trending', scriptHook: '"Stop diversification overload. Here are the 3 pillars of true cashflow..."' }
+                { id: 'i3', title: 'The 3-Asset Portfolio for Financial Freedom', category: 'Work & Wealth', trendScore: '91% Trending', scriptHook: '"Stop diversification overload. Here are the 3 pillars of true cashflow..."' }
             ]
         };
 
-        // INITIALIZATION ON PAGE LOAD
         window.addEventListener('DOMContentLoaded', () => {
-            updateApiKeyUI();
-            renderVaultFiles();
-            renderTasks();
-            renderCalendar();
-            renderStudioShorts();
-            renderPublisherQueue();
-            renderTrendingIdeas();
-            calculateCosts();
+            try {
+                updateApiKeyUI();
+                renderVaultFiles();
+                renderTasks();
+                renderCalendar();
+                renderStudioShorts();
+                renderPublisherQueue();
+                renderTrendingIdeas();
+                calculateCosts();
+            } catch (err) {
+                console.error('Initialization error:', err);
+            }
         });
 
-        // TOAST NOTIFICATION UTILITY
         function saveStateToLocal() {
             try {
                 localStorage.setItem('learnwtf_vault_files', JSON.stringify(state.vaultFiles));
@@ -965,6 +940,7 @@
 
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
+            if (!container) return;
             const toast = document.createElement('div');
             const bgClass = type === 'success' ? 'bg-emeraldMoney border-emerald-400 text-obsidian' :
                              type === 'crimson' ? 'bg-crimson border-red-400 text-white' :
@@ -987,8 +963,13 @@
         // TAB NAVIGATION LOGIC
         function switchTab(tabId) {
             state.activeTab = tabId;
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(tabId).classList.remove('hidden');
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            const targetSection = document.getElementById(tabId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
 
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.className = "tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40";
@@ -1007,12 +988,12 @@
             const tab5Input = document.getElementById('tab5-apikey-input');
 
             if (state.apiKey && state.apiKey.trim().length > 5) {
-                statusBtnText.innerText = "API: Active";
-                statusBtn.className = "flex items-center gap-2 bg-cardBg border border-emeraldMoney/40 hover:border-emeraldMoney px-3 py-1.5 rounded-full text-xs text-emeraldMoney transition-all";
-                if(tab5Input) tab5Input.value = state.apiKey;
+                if (statusBtnText) statusBtnText.innerText = "API: Active";
+                if (statusBtn) statusBtn.className = "flex items-center gap-2 bg-cardBg border border-emeraldMoney/40 hover:border-emeraldMoney px-3 py-1.5 rounded-full text-xs text-emeraldMoney transition-all";
+                if (tab5Input) tab5Input.value = state.apiKey;
             } else {
-                statusBtnText.innerText = "API: Not Set";
-                statusBtn.className = "flex items-center gap-2 bg-cardBg border border-crimson/40 hover:border-crimson px-3 py-1.5 rounded-full text-xs text-crimson transition-all";
+                if (statusBtnText) statusBtnText.innerText = "API: Not Set";
+                if (statusBtn) statusBtn.className = "flex items-center gap-2 bg-cardBg border border-crimson/40 hover:border-crimson px-3 py-1.5 rounded-full text-xs text-crimson transition-all";
             }
         }
 
@@ -1058,7 +1039,6 @@
                 else if (['mp4', 'mov', 'avi', 'mkv'].includes(ext)) type = 'mp4';
                 else if (['png', 'jpg', 'jpeg', 'webp', 'svg'].includes(ext)) type = 'picture';
 
-                // SMART AUTO-RENAMER SIMULATION ENGINE
                 const smartPrefixes = {
                     mp3: 'Podcast_Episode_Raw_',
                     mp4: 'Masterclass_Recording_',
@@ -1083,8 +1063,6 @@
             saveStateToLocal();
             renderVaultFiles();
             showToast(`Uploaded & Auto-Renamed ${files.length} file(s) into Knowledge Vault!`, "success");
-            
-            // Dynamically refresh ideas based on new uploads
             refreshTrendingIdeas();
         }
 
@@ -1100,7 +1078,10 @@
             document.querySelectorAll('.vault-filter-btn').forEach(btn => {
                 btn.className = "vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white";
             });
-            document.getElementById(`vault-filter-${filterType}`).className = "vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-gold/20 text-gold border border-gold/40";
+            const activeFilterBtn = document.getElementById(`vault-filter-${filterType}`);
+            if (activeFilterBtn) {
+                activeFilterBtn.className = "vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-gold/20 text-gold border border-gold/40";
+            }
             renderVaultFiles();
         }
 
@@ -1135,6 +1116,7 @@
 
         function renderVaultFiles() {
             const container = document.getElementById('vault-file-list');
+            if (!container) return;
             document.getElementById('file-count-display').innerText = state.vaultFiles.length;
 
             const filtered = state.vaultFiles.filter(f => state.activeVaultFilter === 'all' || f.type === state.activeVaultFilter);
@@ -1169,19 +1151,16 @@
                     </div>
 
                     <div class="flex items-center gap-2 self-end sm:self-center">
-                        <!-- Access Toggle Button -->
-                        <button onclick="toggleFileAccess('${f.id}')" class="px-2.5 py-1 rounded-xl text-[10px] font-bold flex items-center gap-1.5 transition-all ${isPublic ? 'bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40' : 'bg-crimson/20 text-crimson border border-crimson/40'}">
+                        <button type="button" onclick="toggleFileAccess('${f.id}')" class="px-2.5 py-1 rounded-xl text-[10px] font-bold flex items-center gap-1.5 transition-all ${isPublic ? 'bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40' : 'bg-crimson/20 text-crimson border border-crimson/40'}">
                             <i class="fa-solid ${isPublic ? 'fa-globe' : 'fa-lock'}"></i>
                             <span>${isPublic ? 'Public AI' : 'Private'}</span>
                         </button>
                         
-                        <!-- Convert to Task -->
-                        <button onclick="convertFileToTask('${f.id}')" title="Convert to Task" class="px-2.5 py-1 bg-panelBorder hover:bg-gold hover:text-obsidian text-slate-300 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
+                        <button type="button" onclick="convertFileToTask('${f.id}')" title="Convert to Task" class="px-2.5 py-1 bg-panelBorder hover:bg-gold hover:text-obsidian text-slate-300 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
                             <i class="fa-solid fa-plus"></i> Task
                         </button>
 
-                        <!-- Delete Upload Button -->
-                        <button onclick="deleteVaultFile('${f.id}')" title="Delete Upload" class="px-2.5 py-1 bg-panelBorder hover:bg-crimson hover:text-white text-slate-400 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
+                        <button type="button" onclick="deleteVaultFile('${f.id}')" title="Delete Upload" class="px-2.5 py-1 bg-panelBorder hover:bg-crimson hover:text-white text-slate-400 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
@@ -1190,7 +1169,6 @@
             }).join('');
         }
 
-        // Vault Chatbot Handler
         function handleVaultChat(event) {
             event.preventDefault();
             const input = document.getElementById('chat-input-field');
@@ -1199,7 +1177,6 @@
 
             const chatMessages = document.getElementById('chat-messages');
 
-            // User Message
             chatMessages.innerHTML += `
                 <div class="bg-obsidian/80 rounded-xl p-3 border border-panelBorder text-xs text-right">
                     <p class="text-slate-400 font-semibold mb-1">You</p>
@@ -1210,7 +1187,6 @@
             input.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Generate Mock AI Response based on Public Files
             setTimeout(() => {
                 const publicFiles = state.vaultFiles.filter(f => f.access === 'public');
                 const fileNames = publicFiles.map(f => f.smartName).join(', ');
@@ -1283,6 +1259,7 @@
 
         function renderTasks() {
             const container = document.getElementById('tasks-container');
+            if (!container) return;
             const filtered = state.tasks.filter(t => state.activeTaskFilter === 'all' || t.category === state.activeTaskFilter);
 
             if (filtered.length === 0) {
@@ -1309,7 +1286,7 @@
                     </div>
                     <div class="flex items-center gap-3">
                         <span class="text-[10px] text-slate-400 font-mono"><i class="fa-solid fa-clock text-gold"></i> ${t.date}</span>
-                        <button onclick="deleteTask('${t.id}')" class="text-slate-500 hover:text-crimson text-xs"><i class="fa-solid fa-trash"></i></button>
+                        <button type="button" onclick="deleteTask('${t.id}')" class="text-slate-500 hover:text-crimson text-xs"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </div>
                 `;
@@ -1319,9 +1296,9 @@
         function renderCalendar() {
             const grid = document.getElementById('calendar-days-grid');
             const deadlinePreview = document.getElementById('calendar-deadlines-preview');
+            if (!grid || !deadlinePreview) return;
             grid.innerHTML = '';
 
-            // Generate 31 days for current month (November 2026)
             for (let day = 1; day <= 30; day++) {
                 const dayStr = `2026-11-${day < 10 ? '0' + day : day}`;
                 const hasTasks = state.tasks.filter(t => t.date === dayStr);
@@ -1346,7 +1323,6 @@
                 `;
             }
 
-            // Render upcoming deadlines
             const upcoming = state.tasks.filter(t => !t.completed).slice(0, 3);
             if (upcoming.length === 0) {
                 deadlinePreview.innerHTML = `<p class="text-slate-500 italic">No upcoming pending deadlines.</p>`;
@@ -1399,7 +1375,7 @@
             document.getElementById('studio-source-status').innerText = `Loaded: ${file.name.slice(0, 22)}...`;
 
             videoEl.onloadedmetadata = () => {
-                const dur = videoEl.duration || 960; // fallback 16m if metadata missing
+                const dur = videoEl.duration || 960;
                 state.uploadedVideoDurationSec = dur;
                 showToast(`Loaded "${file.name}" (${formatSeconds(dur)})! Analyzing viral hooks...`, "success");
                 runStudioClipper(true);
@@ -1409,7 +1385,6 @@
                 const activeClip = state.viralShorts[state.selectedShortIndex];
                 if (!activeClip) return;
 
-                // Loop within the selected clip's start and end timestamp
                 if (!activeClip.isMaster && videoEl.currentTime >= activeClip.endTime) {
                     videoEl.currentTime = activeClip.startTime;
                 }
@@ -1421,7 +1396,6 @@
                 document.getElementById('studio-progress-bar').style.width = `${pct}%`;
                 document.getElementById('phone-timecode-display').innerText = `${formatSeconds(elapsed)} / ${formatSeconds(clipDur)}`;
 
-                // Rotate dynamic viral caption lines every 3.5 seconds so it feels like real Reels subtitles
                 if (activeClip.captions && activeClip.captions.length > 0) {
                     const lineIdx = Math.floor(elapsed / 3.5) % activeClip.captions.length;
                     updateFormattedSubtitle(activeClip.captions[lineIdx]);
@@ -1498,9 +1472,8 @@
 
                 const totalDur = state.uploadedVideoDurationSec || 1200;
                 const cleanBaseName = state.uploadedVideoName.replace(/\.[^/.]+$/, "");
-                const editedMasterDur = Math.max(10, Math.floor(totalDur * 0.88)); // ~12% silence removed
+                const editedMasterDur = Math.max(10, Math.floor(totalDur * 0.88));
 
-                // Guarantee at least 3 viral shorts >= 85% virality (and more if >= 15 mins)
                 const segLen = Math.min(58, Math.max(15, Math.floor(totalDur / 4)));
                 const t1 = Math.floor(totalDur * 0.1);
                 const t2 = Math.floor(totalDur * 0.45);
@@ -1557,7 +1530,6 @@
                     }
                 ];
 
-                // If video is 15 minutes (900s) or longer, add a 4th bonus viral short
                 if (totalDur >= 900) {
                     const t4 = Math.floor(totalDur * 0.85);
                     generatedList.push({
@@ -1575,7 +1547,7 @@
                 }
 
                 state.viralShorts = generatedList;
-                state.selectedShortIndex = 1; // Select first viral short by default
+                state.selectedShortIndex = 1;
                 renderStudioShorts();
 
                 const log = document.getElementById('video-prompt-log');
@@ -1608,13 +1580,11 @@
                 `;
             }).join('');
 
-            // Update Phone/Widescreen Preview & Jump Video Player to Selected Clip Timestamp
             const activeShort = state.viralShorts[state.selectedShortIndex];
             if (activeShort) {
                 const frameWrapper = document.getElementById('studio-frame-wrapper');
                 const phoneNotch = document.getElementById('studio-phone-notch');
 
-                // Switch cleanly between 16:9 widescreen for Full Master Video and 9:16 vertical for Viral Shorts
                 if (activeShort.isMaster) {
                     frameWrapper.style.width = '100%';
                     frameWrapper.style.maxWidth = '380px';
@@ -1667,7 +1637,6 @@
             input.value = '';
             log.scrollTop = log.scrollHeight;
 
-            // Visually apply requested style changes to the live 9:16 caption preview
             const lower = txt.toLowerCase();
             const activeShort = state.viralShorts[state.selectedShortIndex];
             const currentLine = (activeShort && activeShort.captions && activeShort.captions[0]) ? activeShort.captions[0] : 'WATCH UNTIL THE END';
@@ -1700,7 +1669,6 @@
             const clipTitle = activeShort ? activeShort.title.replace(/[^a-z0-9]/gi, '_') : 'LearnWTF_Viral_Clip';
 
             if (state.uploadedVideoUrl) {
-                // Download the actual loaded video file
                 const a = document.createElement('a');
                 a.href = state.uploadedVideoUrl;
                 a.download = `${clipTitle}.mp4`;
@@ -1709,7 +1677,6 @@
                 a.remove();
                 showToast(`Downloading "${clipTitle}.mp4"...`, "success");
             } else {
-                // Download an edit decision list / project bundle when using demo mode
                 const content = `LearnWTF Studio Export\nClip: ${activeShort?.title}\nVirality Score: ${activeShort?.virality}%\nDuration: ${activeShort?.duration}\nNote: Upload your raw MP4 in Tab 3 to export the rendered MP4 video file directly.`;
                 const blob = new Blob([content], { type: 'text/plain' });
                 const url = URL.createObjectURL(blob);
@@ -1760,6 +1727,7 @@
 
         function renderPublisherQueue() {
             const container = document.getElementById('publisher-queue-list');
+            if (!container) return;
             document.getElementById('queue-count-badge').innerHTML = `<strong>${state.publisherQueue.length}</strong> Clips Queued for Posting`;
 
             if (state.publisherQueue.length === 0) {
@@ -1780,7 +1748,6 @@
                 `;
             }).join('');
 
-            // Load active item into fields
             const active = state.publisherQueue[state.selectedQueueIndex];
             if (active) {
                 document.getElementById('post-caption-input').value = active.caption;
@@ -1830,7 +1797,7 @@
                 return;
             }
 
-            container.innerHTML = state.trendingIdeas.map((idea, idx) => `
+            container.innerHTML = state.trendingIdeas.map((idea) => `
                 <div class="bg-obsidian border border-panelBorder hover:border-gold/40 p-3.5 rounded-xl space-y-2 transition-all">
                     <div class="flex items-center justify-between">
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold/10 text-gold border border-gold/30">${idea.category}</span>
@@ -1841,7 +1808,7 @@
                     <h4 class="text-xs font-bold text-white font-serif">${idea.title}</h4>
                     <p class="text-[11px] text-slate-400 italic bg-panelBorder/30 p-2 rounded-lg border border-panelBorder/50">${idea.scriptHook}</p>
                     <div class="flex justify-end pt-1">
-                        <button onclick="createTaskFromIdea('${idea.id}')" class="px-3 py-1 bg-panelBorder hover:bg-gold hover:text-obsidian text-slate-300 text-[10px] font-bold rounded-lg transition-all flex items-center gap-1">
+                        <button type="button" onclick="createTaskFromIdea('${idea.id}')" class="px-3 py-1 bg-panelBorder hover:bg-gold hover:text-obsidian text-slate-300 text-[10px] font-bold rounded-lg transition-all flex items-center gap-1">
                             <i class="fa-solid fa-plus"></i> Add to Tasks
                         </button>
                     </div>
@@ -1873,6 +1840,7 @@
                 notes: `Script Hook: ${idea.scriptHook}`
             };
             state.tasks.unshift(newTask);
+            saveStateToLocal();
             renderTasks();
             renderCalendar();
             showToast(`Added "${idea.title}" to Tab 2 Tasks!`, "success");
@@ -1882,22 +1850,20 @@
         // TAB 6: COST ESTIMATOR LOGIC
         // ==========================================
         function calculateCosts() {
-            const model = document.getElementById('costModelSelect').value;
+            const modelEl = document.getElementById('costModelSelect');
+            if (!modelEl) return;
+            const model = modelEl.value;
             const videoMins = parseFloat(document.getElementById('videoMinInput').value) || 0;
             const promptsCount = parseFloat(document.getElementById('promptsInput').value) || 0;
             const shortsCount = parseFloat(document.getElementById('shortsCountInput').value) || 0;
 
-            // UI Label updates
             document.getElementById('video-min-display').innerText = `${videoMins} mins/mo`;
             document.getElementById('prompts-count-display').innerText = `${promptsCount} queries/mo`;
             document.getElementById('shorts-count-display').innerText = `${shortsCount} clips/mo`;
 
-            // OpenAI Pricing Rules (as of 2026 standard rates)
-            // Whisper AI: $0.006 per minute
             const whisperCost = videoMins * 0.006;
 
-            // Model token pricing (per 1M tokens)
-            let inputPrice = 2.50; // default gpt-4o
+            let inputPrice = 2.50;
             let outputPrice = 10.00;
             let badgeText = "GPT-4o ($2.50 / $10.00 per 1M tokens)";
 
@@ -1912,21 +1878,18 @@
             }
             document.getElementById('model-pricing-badge').innerText = badgeText;
 
-            // Vault Chat: Avg 1,500 input tokens + 300 output tokens per prompt query
             const vaultTokensInput = promptsCount * 1500;
             const vaultTokensOutput = promptsCount * 300;
             const vaultCost = ((vaultTokensInput / 1000000) * inputPrice) + ((vaultTokensOutput / 1000000) * outputPrice);
 
-            // Shorts / Captions / Virality Engine: Avg 2,500 input + 600 output tokens per generated short
             const shortsTokensInput = shortsCount * 2500;
             const shortsTokensOutput = shortsCount * 600;
             const shortsCost = ((shortsTokensInput / 1000000) * inputPrice) + ((shortsTokensOutput / 1000000) * outputPrice);
 
             const totalApiCost = whisperCost + vaultCost + shortsCost;
-            const saasCost = 72.00; // Benchmark total SaaS Stack (Opus + Notion AI + Buffer + Descript)
+            const saasCost = 72.00;
             const monthlySavings = Math.max(0, saasCost - totalApiCost);
 
-            // Render Cost Calculations
             document.getElementById('total-api-cost-display').innerText = `$${totalApiCost.toFixed(2)}`;
             document.getElementById('breakdown-whisper').innerText = `$${whisperCost.toFixed(2)}`;
             document.getElementById('breakdown-vault').innerText = `$${vaultCost.toFixed(2)}`;
