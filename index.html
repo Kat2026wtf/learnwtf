@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnWTF | Knowledge Hub & AI Studio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D11',
+                        cardBg: '#14141C',
+                        panelBorder: '#262636',
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA820A'
+                        },
+                        crimson: {
+                            DEFAULT: '#DC2626',
+                            glow: '#EF4444'
+                        },
+                        emeraldMoney: {
+                            DEFAULT: '#10B981',
+                            glow: '#34D399'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0D0D11;
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #997A15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+        }
+        .crimson-glow {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.35);
+        }
+        .emerald-glow {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #14141C;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #262636;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+        /* Mobile phone mockup wrapper */
+        .phone-frame {
+            width: 270px;
+            height: 480px;
+            border: 12px solid #1f1f2e;
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 2px rgba(212,175,55,0.4);
+            position: relative;
+            overflow: hidden;
+            background: #050508;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 18px;
+            background: #1f1f2e;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 30;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between custom-scrollbar bg-obsidian text-slate-200 antialiased selection:bg-gold selection:text-obsidian">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-md border-b border-panelBorder/80 px-4 sm:px-8 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Logo & Slogan -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-crimson to-black border border-gold/40 flex items-center justify-center shadow-lg shadow-crimson/20">
+                    <i class="fa-solid font-bold text-gold text-xl">W</i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-serif font-extrabold tracking-wide gold-gradient-text">LearnWTF</h1>
+                    <p class="text-[10px] tracking-widest uppercase text-emeraldMoney font-semibold">Knowledge Hub & AI Studio</p>
+                </div>
+            </div>
+
+            <!-- Operational Navigation Tabs -->
+            <nav class="flex items-center bg-cardBg border border-panelBorder p-1 rounded-2xl gap-1 overflow-x-auto max-w-full custom-scrollbar">
+                <button onclick="switchTab('tab-knowledge')" id="nav-tab-knowledge" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 bg-gold text-obsidian shadow-md">
+                    <i class="fa-solid fa-vault"></i> <span>Vault & AI</span>
+                </button>
+                <button onclick="switchTab('tab-tasks')" id="nav-tab-tasks" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                    <i class="fa-solid fa-calendar-check"></i> <span>Tasks & Calendar</span>
+                </button>
+                <button onclick="switchTab('tab-studio')" id="nav-tab-studio" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                    <i class="fa-solid fa-film"></i> <span>AI Video Studio</span>
+                </button>
+                <button onclick="switchTab('tab-scheduler')" id="nav-tab-scheduler" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                    <i class="fa-solid fa-share-nodes"></i> <span>Social Publisher</span>
+                </button>
+                <button onclick="switchTab('tab-ideas')" id="nav-tab-ideas" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                    <i class="fa-solid fa-lightbulb"></i> <span>Trends & Settings</span>
+                </button>
+                <button onclick="switchTab('tab-cost')" id="nav-tab-cost" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40">
+                    <i class="fa-solid fa-calculator"></i> <span>Cost Estimator</span>
+                </button>
+            </nav>
+
+            <!-- Status Badges & Key Config -->
+            <div class="flex items-center gap-3">
+                <!-- Local Storage Status -->
+                <div class="flex items-center gap-2 bg-cardBg border border-emeraldMoney/30 px-3 py-1.5 rounded-full text-xs" title="Local Vault Storage Active">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emeraldMoney opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emeraldMoney"></span>
+                    </span>
+                    <i class="fa-solid fa-hard-drive text-slate-300"></i>
+                    <span class="text-emeraldMoney font-medium text-[11px]">Local Vault</span>
+                </div>
+
+                <!-- API Key Status Toggle -->
+                <button onclick="openApiKeyModal()" id="apiKeyStatusBtn" class="flex items-center gap-2 bg-cardBg border border-gold/40 hover:border-gold px-3 py-1.5 rounded-full text-xs text-gold transition-all">
+                    <i class="fa-solid fa-key"></i>
+                    <span id="apiKeyStatusText" class="font-medium text-[11px]">API: Active</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP WRAPPER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-6 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: KNOWLEDGE HUB & CHATBOT (iCloud)    -->
+        <!-- ========================================== -->
+        <section id="tab-knowledge" class="tab-content space-y-6">
+            <!-- Header section -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-2">
+                        <span>Knowledge Vault</span>
+                        <span class="text-xs font-sans px-2.5 py-0.5 rounded-full bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/30">Auto-Renamer Active</span>
+                    </h2>
+                    <p class="text-xs text-slate-400">Uploaded files are auto-renamed by AI content analysis, saved locally, and categorized for your personal AI chatbot.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-xs text-slate-400"><strong class="text-gold" id="file-count-display">4</strong> Files Stored</span>
+                    <button onclick="triggerFileInput()" class="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-obsidian font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload to Vault
+                    </button>
+                    <input type="file" id="cloudFileInput" class="hidden" multiple onchange="handleFileUpload(event)">
+                </div>
+            </div>
+
+            <!-- Drag & Drop Zone -->
+            <div id="drop-zone" onclick="triggerFileInput()" class="border-2 border-dashed border-panelBorder hover:border-gold/60 bg-cardBg/50 hover:bg-cardBg p-6 rounded-2xl text-center cursor-pointer transition-all group">
+                <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gold/10 text-gold flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+                </div>
+                <p class="text-sm font-semibold text-slate-200">Drag and drop MP3, MP4, Images or Documents here</p>
+                <p class="text-xs text-slate-400 mt-1">Smart Engine will auto-categorize, generate context titles, and rename raw files automatically.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Media & Document Explorer (Left 2 Columns) -->
+                <div class="lg:col-span-2 space-y-4">
+                    <!-- Media Type Filter Sub-Tabs -->
+                    <div class="flex items-center justify-between border-b border-panelBorder pb-2">
+                        <div class="flex gap-2">
+                            <button onclick="filterVault('all')" id="vault-filter-all" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-gold/20 text-gold border border-gold/40">All Files</button>
+                            <button onclick="filterVault('mp3')" id="vault-filter-mp3" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Audio (.MP3)</button>
+                            <button onclick="filterVault('mp4')" id="vault-filter-mp4" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Videos (.MP4)</button>
+                            <button onclick="filterVault('picture')" id="vault-filter-picture" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Pictures</button>
+                            <button onclick="filterVault('document')" id="vault-filter-document" class="vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Documents</button>
+                        </div>
+                    </div>
+
+                    <!-- File List Display -->
+                    <div id="vault-file-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+                        <!-- File item cards populated via JS -->
+                    </div>
+                </div>
+
+                <!-- AI Knowledge Chatbot Side Panel (Right 1 Column) -->
+                <div class="bg-cardBg border border-panelBorder rounded-2xl p-4 flex flex-col h-[560px] shadow-xl">
+                    <div class="flex items-center justify-between border-b border-panelBorder pb-3 mb-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-lg bg-crimson/20 border border-crimson/50 text-crimson flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white font-serif">Vault AI Assistant</h3>
+                                <p class="text-[10px] text-emeraldMoney">Queries active Public Vault files</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] bg-gold/10 text-gold border border-gold/30 px-2 py-0.5 rounded-full">RAG Enabled</span>
+                    </div>
+
+                    <!-- Chat Messages Box -->
+                    <div id="chat-messages" class="flex-grow overflow-y-auto space-y-3 custom-scrollbar pr-2 mb-3">
+                        <div class="bg-panelBorder/50 rounded-xl p-3 border border-panelBorder/80 text-xs">
+                            <p class="text-gold font-semibold mb-1"><i class="fa-solid fa-sparkles"></i> LearnWTF Vault AI</p>
+                            <p class="text-slate-300">Welcome back. I have indexed your public knowledge files. Ask me to summarize your podcasts, pull key metrics, or extract quotes!</p>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <form onsubmit="handleVaultChat(event)" class="flex gap-2 pt-2 border-t border-panelBorder">
+                        <input type="text" id="chat-input-field" placeholder="Ask your public knowledge base..." class="flex-grow bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold transition-colors">
+                        <button type="submit" class="px-4 py-2 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl transition-all">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: TASK MANAGER & CALENDAR            -->
+        <!-- ========================================== -->
+        <section id="tab-tasks" class="tab-content space-y-6 hidden">
+            <!-- Header section -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
+                        <span>Task Command Center</span>
+                        <div class="flex items-center gap-1.5 text-xs">
+                            <span class="px-2 py-0.5 rounded bg-gold/20 text-gold border border-gold/40">Work</span>
+                            <span class="px-2 py-0.5 rounded bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40">School</span>
+                            <span class="px-2 py-0.5 rounded bg-crimson/20 text-crimson border border-crimson/40">Podcast</span>
+                        </div>
+                    </h2>
+                    <p class="text-xs text-slate-400">Organize luxury workflows, school projects, and podcast production schedules.</p>
+                </div>
+                <button onclick="openAddTaskModal()" class="px-4 py-2 bg-gradient-to-r from-emeraldMoney to-teal-700 text-white font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 hover:brightness-110 transition-all">
+                    <i class="fa-solid fa-plus"></i> Add New Task
+                </button>
+            </div>
+
+            <!-- Task List & Interactive Calendar Split View -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Task Management Board (7 cols) -->
+                <div class="lg:col-span-7 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-panelBorder pb-3">
+                        <h3 class="font-serif font-bold text-gold text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-list-check"></i> Operational Queue
+                        </h3>
+                        <!-- Filter categories -->
+                        <div class="flex gap-1">
+                            <button onclick="filterTasks('all')" class="task-filter-btn px-2.5 py-1 rounded text-xs bg-gold/20 text-gold border border-gold/30">All</button>
+                            <button onclick="filterTasks('Work')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-gold">Work</button>
+                            <button onclick="filterTasks('School')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-emeraldMoney">School</button>
+                            <button onclick="filterTasks('Podcast')" class="task-filter-btn px-2.5 py-1 rounded text-xs text-slate-400 hover:text-crimson">Podcast</button>
+                        </div>
+                    </div>
+
+                    <!-- Tasks List Container -->
+                    <div id="tasks-container" class="space-y-3 max-h-[460px] overflow-y-auto pr-1 custom-scrollbar">
+                        <!-- Task items generated via JS -->
+                    </div>
+                </div>
+
+                <!-- Interactive Calendar Widget (5 cols) -->
+                <div class="lg:col-span-5 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 border-b border-panelBorder pb-3">
+                            <h3 class="font-serif font-bold text-white text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-days text-gold"></i> Schedule Calendar
+                            </h3>
+                            <span class="text-xs text-gold font-semibold" id="calendar-month-year">November 2026</span>
+                        </div>
+                        
+                        <!-- Weekday Headers -->
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-slate-400 mb-2">
+                            <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                        </div>
+
+                        <!-- Calendar Grid -->
+                        <div id="calendar-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Selected Day Tasks Detail Panel -->
+                    <div class="mt-4 pt-3 border-t border-panelBorder">
+                        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                            <span class="font-bold text-white">Upcoming Deadlines</span>
+                            <span class="text-emeraldMoney"><i class="fa-solid fa-circle text-[8px]"></i> Real-Time Synced</span>
+                        </div>
+                        <div id="calendar-deadlines-preview" class="space-y-2 text-xs">
+                            <!-- Deadlines populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: AI VIDEO STUDIO & VIRAL CLIPPER     -->
+        <!-- ========================================== -->
+        <section id="tab-studio" class="tab-content space-y-6 hidden">
+            <!-- Header section -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
+                        <span>AI Video Studio & Viral Clipper</span>
+                        <span class="text-xs font-sans px-2.5 py-0.5 rounded-full bg-crimson/20 text-crimson border border-crimson/40 font-semibold">
+                            <i class="fa-solid fa-fire"></i> 85%+ Virality Guarantee
+                        </span>
+                    </h2>
+                    <p class="text-xs text-slate-400">Processes videos up to 2 hrs. Auto-strips silences, cuts multi-cam angles, and isolates top vertical shorts.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="triggerStudioUpload()" class="px-4 py-2 bg-crimson hover:bg-crimson-glow text-white font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
+                        <i class="fa-solid fa-video"></i> Import Raw Video (Up to 2h)
+                    </button>
+                    <input type="file" id="studioFileInput" accept="video/mp4,video/*" class="hidden" onchange="handleStudioUpload(event)">
+                </div>
+            </div>
+
+            <!-- Studio Control & Preview Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Left Control Panel & Processing Specs (4 Cols) -->
+                <div class="lg:col-span-4 space-y-4">
+                    <!-- Processing Controls Card -->
+                    <div class="bg-cardBg border border-panelBorder rounded-2xl p-4 space-y-4 shadow-xl">
+                        <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders"></i> Smart Editing Parameters
+                        </h3>
+
+                        <!-- Cut Silences Slider -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-300">Silence Removal Threshold</span>
+                                <span class="text-gold font-mono">-35 dB</span>
+                            </div>
+                            <input type="range" class="w-full accent-gold bg-obsidian rounded-lg h-1.5 cursor-pointer" min="1" max="100" value="75">
+                        </div>
+
+                        <!-- Options toggles -->
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center justify-between cursor-pointer p-2 rounded-lg bg-obsidian border border-panelBorder hover:border-gold/30">
+                                <span>Auto Multi-Cam Angle Cuts</span>
+                                <input type="checkbox" checked class="accent-gold w-4 h-4 rounded">
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer p-2 rounded-lg bg-obsidian border border-panelBorder hover:border-gold/30">
+                                <span>Auto-Reframe to 9:16 Vertical</span>
+                                <input type="checkbox" checked class="accent-gold w-4 h-4 rounded">
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer p-2 rounded-lg bg-obsidian border border-panelBorder hover:border-gold/30">
+                                <span>Enforce Virality Threshold (&ge; 85%)</span>
+                                <input type="checkbox" checked class="accent-emeraldMoney w-4 h-4 rounded">
+                            </label>
+                        </div>
+
+                        <!-- Action trigger -->
+                        <button onclick="runStudioClipper()" id="runClipperBtn" class="w-full py-3 bg-gradient-to-r from-gold via-yellow-500 to-gold-dark hover:brightness-110 text-obsidian font-extrabold text-xs rounded-xl shadow-xl flex items-center justify-center gap-2 transition-all uppercase tracking-wider">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Viral Shorts & Full Video
+                        </button>
+                    </div>
+
+                    <!-- AI Conversational Video Edit Prompt Chat -->
+                    <div class="bg-cardBg border border-panelBorder rounded-2xl p-4 space-y-3 shadow-xl">
+                        <h3 class="font-serif font-bold text-white text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-comments text-gold"></i> AI Video Edit Prompt
+                        </h3>
+                        <p class="text-[11px] text-slate-400">Instruct the editor on custom visual tweaks or captions.</p>
+                        
+                        <div id="video-prompt-log" class="text-xs bg-obsidian p-2.5 rounded-xl border border-panelBorder max-h-28 overflow-y-auto space-y-1 text-slate-300">
+                            <p class="text-emeraldMoney"><i class="fa-solid fa-check"></i> Applied: Removed 4m 12s of silences & filler words.</p>
+                            <p class="text-gold"><i class="fa-solid fa-check"></i> Applied: Auto dynamic zoom on punchlines.</p>
+                        </div>
+
+                        <form onsubmit="handleVideoEditPrompt(event)" class="flex gap-2">
+                            <input type="text" id="video-edit-input" placeholder="e.g. Add gold captions with emerald highlight" class="flex-grow bg-obsidian border border-panelBorder rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-gold">
+                            <button type="submit" class="px-3 py-1.5 bg-panelBorder hover:bg-gold text-slate-200 hover:text-obsidian rounded-xl text-xs font-bold transition-all">
+                                Send
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Video Preview Stage (8 Cols) -->
+                <div class="lg:col-span-8 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl flex flex-col justify-between space-y-6">
+                    
+                    <!-- Main Video Player Stage -->
+                    <div>
+                        <div class="flex items-center justify-between border-b border-panelBorder pb-3 mb-4">
+                            <div class="flex items-center gap-3">
+                                <h3 class="font-serif font-bold text-white text-lg" id="current-preview-title">Full Master Video (Edited)</h3>
+                                <span class="px-2 py-0.5 rounded-full text-[10px] bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-bold" id="preview-virality-badge">Virality Score: 94%</span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono" id="current-preview-duration">Duration: 42:15</span>
+                        </div>
+
+                        <!-- Player Container with simulated media frame -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                            
+                            <!-- Phone Frame Mockup for Vertical 9:16 Preview -->
+                            <div class="md:col-span-5 flex justify-center">
+                                <div class="phone-frame flex flex-col justify-between p-4">
+                                    <div class="phone-notch"></div>
+                                    <!-- Dynamic Video Simulation Canvas -->
+                                    <div id="phone-screen-content" class="h-full w-full rounded-2xl bg-gradient-to-b from-purple-900/40 via-obsidian to-black border border-gold/20 flex flex-col justify-between p-3 relative overflow-hidden mt-2">
+                                        <!-- Animated video bar overlay -->
+                                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px] animate-pulse"></div>
+                                        
+                                        <!-- Top Badge inside phone -->
+                                        <div class="flex justify-between items-center z-10 pt-2">
+                                            <span class="bg-crimson text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">🔥 Viral Clip</span>
+                                            <span class="text-[10px] text-gold font-bold"><i class="fa-solid fa-eye"></i> Est. 850k+</span>
+                                        </div>
+
+                                        <!-- Center content text simulation -->
+                                        <div class="z-10 my-auto text-center space-y-2">
+                                            <div class="w-12 h-12 rounded-full bg-gold/20 border border-gold text-gold mx-auto flex items-center justify-center animate-bounce">
+                                                <i class="fa-solid fa-play"></i>
+                                            </div>
+                                            <p id="phone-caption-preview" class="text-xs font-extrabold text-white leading-tight uppercase tracking-wider px-2 drop-shadow-md">
+                                                "IF YOU WANT REAL WEALTH IN 2026, STOP SAVING PAPER MONEY!"
+                                            </p>
+                                        </div>
+
+                                        <!-- Phone Bottom Controls Simulation -->
+                                        <div class="z-10 space-y-1">
+                                            <div class="flex items-center justify-between text-[10px] text-slate-300">
+                                                <span>@LearnWTF</span>
+                                                <span class="text-emeraldMoney font-bold">#Finance #Wealth</span>
+                                            </div>
+                                            <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                                                <div class="bg-gold h-full w-2/3 animate-pulse"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shorts Clip Chooser Grid -->
+                            <div class="md:col-span-7 space-y-3">
+                                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center justify-between">
+                                    <span>Generated Viral Shorts (&ge;15m Rule: 3 Min)</span>
+                                    <span class="text-emeraldMoney">85%+ Score Verified</span>
+                                </h4>
+
+                                <div id="shorts-list-container" class="space-y-2.5 max-h-[360px] overflow-y-auto pr-1 custom-scrollbar">
+                                    <!-- Viral Shorts item cards populated via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Bar: Export to Tab 4 & Download -->
+                    <div class="pt-4 border-t border-panelBorder flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <button onclick="downloadCurrentVideo()" class="w-full sm:w-auto px-4 py-2.5 bg-panelBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-download"></i> Download Video File
+                        </button>
+                        <button onclick="transferToScheduler()" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-emeraldMoney to-teal-600 hover:brightness-110 text-white rounded-xl text-xs font-extrabold shadow-xl flex items-center justify-center gap-2 transition-all tracking-wider uppercase">
+                            <i class="fa-solid fa-paper-plane"></i> Export Selected Clip to Tab 4 Post Scheduler
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: MULTI-PLATFORM AUTO-SCHEDULER       -->
+        <!-- ========================================== -->
+        <section id="tab-scheduler" class="tab-content space-y-6 hidden">
+            <!-- Header section -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
+                        <span>Multi-Platform Publisher & Auto-Scheduler</span>
+                        <span class="text-xs font-sans px-2 py-0.5 rounded bg-gold/20 text-gold border border-gold/30 font-semibold">9:16 Format Optimized</span>
+                    </h2>
+                    <p class="text-xs text-slate-400">Connect accounts, automatically generate viral captions/hashtags, and schedule or publish immediately.</p>
+                </div>
+                <span class="text-xs text-slate-400" id="queue-count-badge"><strong>3</strong> Clips Queued for Posting</span>
+            </div>
+
+            <!-- Connected Accounts Toggle Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <!-- TikTok -->
+                <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-brands fa-tiktok text-pink-500 text-xl"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">TikTok</p>
+                            <p class="text-[10px] text-emeraldMoney" id="status-tiktok">Connected</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" checked onchange="toggleAccount('tiktok')" class="accent-gold w-4 h-4 cursor-pointer">
+                </div>
+                <!-- Instagram -->
+                <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-brands fa-instagram text-rose-500 text-xl"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">IG Reels</p>
+                            <p class="text-[10px] text-emeraldMoney" id="status-instagram">Connected</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" checked onchange="toggleAccount('instagram')" class="accent-gold w-4 h-4 cursor-pointer">
+                </div>
+                <!-- YouTube Shorts -->
+                <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-brands fa-youtube text-red-600 text-xl"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">YT Shorts</p>
+                            <p class="text-[10px] text-emeraldMoney" id="status-youtube">Connected</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" checked onchange="toggleAccount('youtube')" class="accent-gold w-4 h-4 cursor-pointer">
+                </div>
+                <!-- Facebook Reels -->
+                <div class="bg-cardBg border border-panelBorder p-3 rounded-2xl flex items-center justify-between hover:border-gold/40 transition-all">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-brands fa-facebook text-blue-500 text-xl"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">FB Reels</p>
+                            <p class="text-[10px] text-emeraldMoney" id="status-facebook">Connected</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" checked onchange="toggleAccount('facebook')" class="accent-gold w-4 h-4 cursor-pointer">
+                </div>
+            </div>
+
+            <!-- Queue & Publisher Editor Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Video Post List / Queue (5 cols) -->
+                <div class="lg:col-span-5 bg-cardBg border border-panelBorder rounded-2xl p-4 space-y-3 shadow-xl">
+                    <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-2 flex items-center justify-between">
+                        <span><i class="fa-solid fa-list-ul"></i> Pending Video Queue</span>
+                        <span class="text-xs text-slate-400 font-sans">Tab 3 Imports</span>
+                    </h3>
+                    <div id="publisher-queue-list" class="space-y-3 max-h-[460px] overflow-y-auto pr-1 custom-scrollbar">
+                        <!-- Queue items rendered via JS -->
+                    </div>
+                </div>
+
+                <!-- Active Post Detail & Caption Generator (7 cols) -->
+                <div class="lg:col-span-7 bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-panelBorder pb-3">
+                        <h3 class="font-serif font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-pen-to-square text-gold"></i> AI Caption & Hashtag Configuration
+                        </h3>
+                        <button onclick="generateFreshCaptions()" class="px-3 py-1 bg-gold/20 hover:bg-gold text-gold hover:text-obsidian border border-gold/40 rounded-xl text-xs font-bold transition-all">
+                            <i class="fa-solid fa-rotate"></i> Regenerate AI Captions
+                        </button>
+                    </div>
+
+                    <!-- Caption Input Area (Formatted for 9:16 mobile screens) -->
+                    <div class="space-y-2">
+                        <label class="text-xs text-slate-300 font-semibold flex justify-between">
+                            <span>Post Caption & Hook</span>
+                            <span class="text-emeraldMoney text-[10px]">Formatted for 9:16 Viewport</span>
+                        </label>
+                        <textarea id="post-caption-input" rows="4" class="w-full bg-obsidian border border-panelBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-gold font-sans leading-relaxed custom-scrollbar" placeholder="Generated viral caption..."></textarea>
+                    </div>
+
+                    <!-- Generated Niche Hashtags -->
+                    <div class="space-y-2">
+                        <label class="text-xs text-slate-300 font-semibold">AI Niche Hashtags</label>
+                        <input type="text" id="post-hashtags-input" class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-gold font-mono focus:outline-none focus:border-gold" value="#WealthHacks #FinancialFreedom #LearnWTF #MoneyTok #PassiveIncome">
+                    </div>
+
+                    <!-- Scheduling Time & Date Picker -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div>
+                            <label class="text-xs text-slate-300 font-semibold block mb-1">Publishing Date</label>
+                            <input type="date" id="schedule-date-input" class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-300 font-semibold block mb-1">Publishing Time</label>
+                            <input type="time" id="schedule-time-input" value="18:30" class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold">
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="pt-4 border-t border-panelBorder flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <button onclick="downloadActivePostVideo()" class="w-full sm:w-auto px-4 py-2.5 bg-panelBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-download"></i> Download Video & Reels
+                        </button>
+
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <button onclick="schedulePostAction()" class="flex-1 sm:flex-none px-4 py-2.5 bg-gold hover:bg-gold-light text-obsidian font-extrabold rounded-xl text-xs shadow-lg transition-all">
+                                <i class="fa-solid fa-clock"></i> Schedule Post
+                            </button>
+                            <button onclick="publishNowAction()" class="flex-1 sm:flex-none px-5 py-2.5 bg-crimson hover:bg-crimson-glow text-white font-extrabold rounded-xl text-xs shadow-lg transition-all">
+                                <i class="fa-solid fa-paper-plane"></i> Post Immediately
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 5: NICHE CONTENT IDEAS & API CONFIG    -->
+        <!-- ========================================== -->
+        <section id="tab-ideas" class="tab-content space-y-6 hidden">
+            <!-- Header section -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
+                        <span>Niche Content AI Idea Engine & GitHub Setup</span>
+                        <span class="text-xs font-sans px-2.5 py-0.5 rounded-full bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-semibold">Zero Host Cost</span>
+                    </h2>
+                    <p class="text-xs text-slate-400">Content ideas adjust dynamically as you upload more videos. Configured for private GitHub Pages execution.</p>
+                </div>
+                <button onclick="refreshTrendingIdeas()" class="px-4 py-2 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-arrows-rotate"></i> Refresh Niche Trends
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Trending Ideas List (7 cols) -->
+                <div class="lg:col-span-7 bg-cardBg border border-panelBorder rounded-2xl p-5 space-y-4 shadow-xl">
+                    <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-3 flex items-center justify-between">
+                        <span><i class="fa-solid fa-fire text-crimson"></i> Personalized Trending Video Ideas</span>
+                        <span class="text-[11px] text-emeraldMoney font-sans font-normal">Adapted from your uploaded content</span>
+                    </h3>
+
+                    <div id="trending-ideas-container" class="space-y-3.5 max-h-[480px] overflow-y-auto pr-1 custom-scrollbar">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- API Key & GitHub Pages Privacy Guide (5 cols) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <!-- OpenAI API Key Card -->
+                    <div class="bg-cardBg border border-gold/40 rounded-2xl p-5 space-y-3 shadow-xl gold-border-glow">
+                        <h3 class="font-serif font-bold text-gold text-base flex items-center gap-2">
+                            <i class="fa-solid fa-key"></i> OpenAI ChatGPT API Key
+                        </h3>
+                        <p class="text-xs text-slate-300">
+                            Provide your personal OpenAI key to run AI Vault RAG, auto-captions, and clip analysis directly from your browser.
+                        </p>
+                        
+                        <div class="space-y-2">
+                            <input type="password" id="tab5-apikey-input" placeholder="sk-proj-..." class="w-full bg-obsidian border border-panelBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold font-mono">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] text-slate-400"><i class="fa-solid fa-shield-halved text-emeraldMoney"></i> Stored in local browser vault</span>
+                                <button onclick="saveApiKeyTab5()" class="px-4 py-1.5 bg-gold hover:bg-gold-light text-obsidian font-bold text-xs rounded-xl transition-all">
+                                    Save Key
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GitHub Pages Private Host Instructions -->
+                    <div class="bg-cardBg border border-panelBorder rounded-2xl p-5 space-y-3 shadow-xl">
+                        <h3 class="font-serif font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-brands fa-github text-gold"></i> GitHub Pages Host Guide
+                        </h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Run LearnWTF securely with <strong>zero server costs</strong>:
+                        </p>
+                        <ol class="list-decimal list-inside text-xs text-slate-400 space-y-2 pl-1">
+                            <li>Create a private repository on <strong class="text-white">GitHub.com</strong> named <code class="text-gold font-mono">learnwtf-app</code>.</li>
+                            <li>Upload this <code class="text-gold font-mono">index.html</code> file to the root of the repository.</li>
+                            <li>Navigate to <strong>Settings &rarr; Pages</strong> and select <em>main branch / root</em>.</li>
+                            <li>Your app will be live at <code class="text-emeraldMoney font-mono">https://username.github.io/learnwtf-app</code>.</li>
+                        </ol>
+                        <div class="p-2.5 rounded-xl bg-obsidian border border-emeraldMoney/30 text-[11px] text-emeraldMoney flex items-center gap-2 mt-2">
+                            <i class="fa-solid fa-lock text-sm"></i>
+                            <span>All uploads and data stay safely saved in your personal browser vault.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 6: REAL-TIME COST ESTIMATOR            -->
+        <!-- ========================================== -->
+        <section id="tab-cost" class="tab-content space-y-6 hidden">
+            <!-- Header section -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-3">
+                        <span>API Cost & SaaS Savings Calculator</span>
+                        <span class="text-xs font-sans px-2.5 py-0.5 rounded-full bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-semibold">
+                            <i class="fa-solid fa-piggy-bank"></i> Pay-As-You-Go Efficiency
+                        </span>
+                    </h2>
+                    <p class="text-xs text-slate-400">Calculate real-time OpenAI spending for video transcription, AI vault queries, and viral caption generation vs. costly SaaS subscriptions.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="bg-cardBg border border-emeraldMoney/40 px-3 py-1.5 rounded-xl text-xs">
+                        <span class="text-slate-400">Estimated SaaS Savings: </span>
+                        <strong class="text-emeraldMoney font-mono text-sm" id="header-monthly-savings">$68.45/mo</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cost Calculator Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Interactive Controls (7 cols) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="bg-cardBg border border-panelBorder rounded-2xl p-5 space-y-5 shadow-xl">
+                        <h3 class="font-serif font-bold text-gold text-base border-b border-panelBorder pb-2 flex items-center justify-between">
+                            <span><i class="fa-solid fa-sliders text-gold"></i> Usage Estimates & Model Selection</span>
+                            <span class="text-[11px] font-sans text-slate-400">Adjust parameters</span>
+                        </h3>
+
+                        <!-- AI Model Picker -->
+                        <div class="space-y-1">
+                            <label class="text-xs text-slate-300 font-semibold flex justify-between">
+                                <span>Primary Chat Model</span>
+                                <span class="text-gold text-[10px]" id="model-pricing-badge">GPT-4o ($2.50 / 1M Input Tokens)</span>
+                            </label>
+                            <select id="costModelSelect" onchange="calculateCosts()" class="w-full bg-obsidian border border-panelBorder rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-gold">
+                                <option value="gpt-4o" selected>GPT-4o (High Intelligence, $2.50 / $10.00 per 1M tokens)</option>
+                                <option value="gpt-4o-mini">GPT-4o-mini (Ultra Fast & Cheap, $0.15 / $0.60 per 1M tokens)</option>
+                                <option value="gpt-4-turbo">GPT-4 Turbo ($10.00 / $30.00 per 1M tokens)</option>
+                            </select>
+                        </div>
+
+                        <!-- Video Minutes Slider (Whisper AI) -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-300 font-semibold"><i class="fa-solid fa-microphone-lines text-gold"></i> Monthly Video/Audio Processed (Whisper AI)</span>
+                                <span class="text-emeraldMoney font-mono font-bold" id="video-min-display">120 mins/mo</span>
+                            </div>
+                            <input type="range" id="videoMinInput" min="0" max="1000" value="120" step="10" oninput="calculateCosts()" class="w-full accent-gold bg-obsidian rounded-lg h-2 cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-slate-500">
+                                <span>0 mins</span>
+                                <span>500 mins (~8 hrs)</span>
+                                <span>1,000 mins (~16 hrs)</span>
+                            </div>
+                        </div>
+
+                        <!-- Knowledge Vault RAG Queries -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-300 font-semibold"><i class="fa-solid fa-comments text-gold"></i> Monthly AI Vault Chat Prompts</span>
+                                <span class="text-gold font-mono font-bold" id="prompts-count-display">150 queries/mo</span>
+                            </div>
+                            <input type="range" id="promptsInput" min="0" max="1000" value="150" step="10" oninput="calculateCosts()" class="w-full accent-gold bg-obsidian rounded-lg h-2 cursor-pointer">
+                        </div>
+
+                        <!-- Viral Shorts Generated -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-300 font-semibold"><i class="fa-solid fa-scissors text-crimson"></i> Monthly Viral Shorts & Captions Generated</span>
+                                <span class="text-crimson font-mono font-bold" id="shorts-count-display">25 clips/mo</span>
+                            </div>
+                            <input type="range" id="shortsCountInput" min="0" max="200" value="25" step="5" oninput="calculateCosts()" class="w-full accent-crimson bg-obsidian rounded-lg h-2 cursor-pointer">
+                        </div>
+
+                        <!-- Preset Buttons -->
+                        <div class="pt-2 border-t border-panelBorder flex items-center gap-2">
+                            <span class="text-[11px] text-slate-400">Quick Presets:</span>
+                            <button onclick="setCostPreset('casual')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Casual Creator</button>
+                            <button onclick="setCostPreset('pro')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Pro Podcaster</button>
+                            <button onclick="setCostPreset('agency')" class="px-3 py-1 bg-panelBorder hover:bg-gold/20 text-slate-300 hover:text-gold text-xs rounded-lg transition-all">Media Agency</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakdown & SaaS Comparison (5 cols) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <!-- Total Estimated Cost Card -->
+                    <div class="bg-cardBg border border-gold/40 rounded-2xl p-5 shadow-xl gold-border-glow space-y-4">
+                        <div class="flex items-center justify-between border-b border-panelBorder pb-3">
+                            <h3 class="font-serif font-bold text-white text-base">Estimated Direct API Cost</h3>
+                            <span class="text-[10px] bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 px-2 py-0.5 rounded-full font-bold">Zero Host Overhead</span>
+                        </div>
+
+                        <div class="text-center py-2">
+                            <p class="text-4xl font-serif font-extrabold gold-gradient-text" id="total-api-cost-display">$1.55</p>
+                            <p class="text-xs text-slate-400 mt-1">Per Month (Estimated OpenAI Token Usage)</p>
+                        </div>
+
+                        <!-- Per-Feature Cost Breakdown -->
+                        <div class="space-y-2 text-xs bg-obsidian p-3 rounded-xl border border-panelBorder">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400"><i class="fa-solid fa-microphone text-gold"></i> Whisper Audio Transcription:</span>
+                                <span class="text-white font-mono font-bold" id="breakdown-whisper">$0.72</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400"><i class="fa-solid fa-vault text-gold"></i> Knowledge Vault AI Chat:</span>
+                                <span class="text-white font-mono font-bold" id="breakdown-vault">$0.38</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400"><i class="fa-solid fa-film text-crimson"></i> Shorts Reframe & Captions:</span>
+                                <span class="text-white font-mono font-bold" id="breakdown-shorts">$0.45</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SaaS Comparison Card -->
+                    <div class="bg-cardBg border border-panelBorder rounded-2xl p-5 shadow-xl space-y-3">
+                        <h3 class="font-serif font-bold text-emeraldMoney text-base flex items-center justify-between">
+                            <span><i class="fa-solid fa-scale-balanced"></i> Traditional SaaS vs LearnWTF</span>
+                            <span class="text-xs text-slate-400 font-sans">Monthly Cost</span>
+                        </h3>
+
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-obsidian border border-panelBorder">
+                                <span class="text-slate-300">Opus Clip Pro (Viral Shorts)</span>
+                                <span class="text-crimson font-mono line-through font-bold">$29.00/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-obsidian border border-panelBorder">
+                                <span class="text-slate-300">Notion AI + Vault Workspace</span>
+                                <span class="text-crimson font-mono line-through font-bold">$10.00/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-obsidian border border-panelBorder">
+                                <span class="text-slate-300">Buffer / Hootsuite Publisher</span>
+                                <span class="text-crimson font-mono line-through font-bold">$18.00/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-obsidian border border-panelBorder">
+                                <span class="text-slate-300">Descript / Silence Cutter</span>
+                                <span class="text-crimson font-mono line-through font-bold">$15.00/mo</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-panelBorder flex justify-between items-center">
+                            <div>
+                                <p class="text-[10px] text-slate-400 uppercase tracking-wider">Total SaaS Cost</p>
+                                <p class="text-sm font-bold text-crimson font-mono line-through">$72.00 / mo</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] text-emeraldMoney uppercase tracking-wider font-bold">Your Monthly Savings</p>
+                                <p class="text-lg font-serif font-extrabold text-emeraldMoney font-mono" id="card-savings-display">$70.45 / mo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+<!-- ... existing code me ... -->
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT LOGIC & STATE ENGINE           -->
+    <!-- ========================================== -->
+    <script>
+        // GLOBAL APP STATE
+        const state = {
+            apiKey: localStorage.getItem('learnwtf_api_key') || '',
+            activeTab: 'tab-knowledge',
+            activeVaultFilter: 'all',
+            activeTaskFilter: 'all',
+            // Pre-populated Vault Files (Loaded from localStorage if available)
+            vaultFiles: JSON.parse(localStorage.getItem('learnwtf_vault_files')) || [
+                { id: 'f1', rawName: 'podcast_raw_01.mp3', smartName: 'Episode_42_Wealth_Hacks.mp3', type: 'mp3', access: 'public', date: '2026-11-08', size: '48.2 MB', context: 'Deep dive into passive income streams and asset allocation strategy.' },
+                { id: 'f2', rawName: 'video_shoot_final.mp4', smartName: 'Masterclass_Finance_Strategy_v1.mp4', type: 'mp4', access: 'public', date: '2026-11-09', size: '1.2 GB', duration: '01:42:15', context: '2 hour lecture covering market psychology and option leverage.' },
+                { id: 'f3', rawName: 'IMG_8842.png', smartName: 'Luxury_Portfolio_Breakdown_Graph.png', type: 'picture', access: 'private', date: '2026-11-07', size: '4.1 MB', context: 'Infographic of asset distribution.' },
+                { id: 'f4', rawName: 'notes_lecture_3.docx', smartName: 'Syllabus_Real_Estate_Structuring.docx', type: 'document', access: 'public', date: '2026-11-05', size: '820 KB', context: 'School lecture notes on entity formation and asset protection.' }
+            ],
+            // Tasks State (Loaded from localStorage if available)
+            tasks: JSON.parse(localStorage.getItem('learnwtf_tasks')) || [
+                { id: 't1', title: 'Finish School Project: Tax Code Case Study', category: 'School', date: '2026-11-12', completed: false, notes: 'Analyze Section 1031 exchange precedents.' },
+                { id: 't2', title: 'Edit & Export Podcast Ep #43 Video Clips', category: 'Podcast', date: '2026-11-11', completed: false, notes: 'Focus on 9:16 vertical hooks for TikTok.' },
+                { id: 't3', title: 'Review Q4 Wealth Portfolio Allocation', category: 'Work', date: '2026-11-15', completed: true, notes: 'Rebalance high yield dividend assets.' }
+            ],
+            // Viral Shorts State
+            viralShorts: [
+                { id: 's1', title: 'Stop Saving Paper Money (The Inflation Trap)', virality: 95, duration: '00:45', hook: 'Extreme High Hook', viewsEst: '1.2M+' },
+                { id: 's2', title: '3 Tax Secrets Ultra-Rich People Use', virality: 92, duration: '00:58', hook: 'High Financial Curiosity', viewsEst: '850K+' },
+                { id: 's3', title: 'How To Build a 7-Figure Portfolio in College', virality: 88, duration: '00:52', hook: 'Strong Student Relevance', viewsEst: '620K+' }
+            ],
+            selectedShortIndex: 0,
+            // Publisher Queue
+            publisherQueue: [
+                { id: 'pq1', title: 'Stop Saving Paper Money (The Inflation Trap)', virality: 95, caption: '🚨 Paper money is losing value every single day. Here is how top investors store wealth instead. Save this clip before it gets taken down! 💸🔥', hashtags: '#LearnWTF #FinancialFreedom #WealthHacks #MoneyTok #Investing' },
+                { id: 'pq2', title: '3 Tax Secrets Ultra-Rich People Use', virality: 92, caption: 'Legally lower your tax burden with these 3 entity strategies taught in top finance schools. 📈🏆', hashtags: '#TaxHacks #RealEstate #BusinessOwner #SeductiveFinance' }
+            ],
+            selectedQueueIndex: 0,
+            // Trending Ideas
+            trendingIdeas: [
+                { id: 'i1', title: 'Why 90% of College Grads Fail at Wealth Building', category: 'School & Finance', trendScore: '98% Trending', scriptHook: '"They teach you calculus, but never taught you how to read a balance sheet..."' },
+                { id: 'i2', title: 'How to Launch a Podcast that Monetizes on Day 1', category: 'Podcast Masterclass', trendScore: '94% Trending', scriptHook: '"Sponsorships are dead. Here is the modern high-ticket affiliate funnel..."' },
+                { id: 'i3', title: 'The 3-Asset Portfolio for Seductive Financial Freedom', category: 'Luxury Work', trendScore: '91% Trending', scriptHook: '"Stop diversification overload. Here are the 3 pillars of true cashflow..."' }
+            ]
+        };
+
+        // INITIALIZATION ON PAGE LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            updateApiKeyUI();
+            renderVaultFiles();
+            renderTasks();
+            renderCalendar();
+            renderStudioShorts();
+            renderPublisherQueue();
+            renderTrendingIdeas();
+            calculateCosts();
+        });
+
+        // TOAST NOTIFICATION UTILITY
+        function saveStateToLocal() {
+            try {
+                localStorage.setItem('learnwtf_vault_files', JSON.stringify(state.vaultFiles));
+                localStorage.setItem('learnwtf_tasks', JSON.stringify(state.tasks));
+            } catch (e) {
+                console.warn('Local storage quota exceeded:', e);
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-emeraldMoney border-emerald-400 text-obsidian' :
+                             type === 'crimson' ? 'bg-crimson border-red-400 text-white' :
+                             'bg-cardBg border-gold/50 text-gold';
+            
+            toast.className = `pointer-events-auto flex items-center gap-2 px-4 py-3 rounded-xl border text-xs font-bold shadow-2xl transition-all duration-300 transform translate-y-2 opacity-0 ${bgClass}`;
+            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-bell'}"></i> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // TAB NAVIGATION LOGIC
+        function switchTab(tabId) {
+            state.activeTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 text-slate-400 hover:text-gold hover:bg-panelBorder/40";
+            });
+
+            const activeNavBtn = document.getElementById(`nav-${tabId}`);
+            if (activeNavBtn) {
+                activeNavBtn.className = "tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 bg-gold text-obsidian shadow-md";
+            }
+        }
+
+        // API KEY MANAGEMENT LOGIC
+        function updateApiKeyUI() {
+            const statusBtnText = document.getElementById('apiKeyStatusText');
+            const statusBtn = document.getElementById('apiKeyStatusBtn');
+            const tab5Input = document.getElementById('tab5-apikey-input');
+
+            if (state.apiKey && state.apiKey.trim().length > 5) {
+                statusBtnText.innerText = "API: Active";
+                statusBtn.className = "flex items-center gap-2 bg-cardBg border border-emeraldMoney/40 hover:border-emeraldMoney px-3 py-1.5 rounded-full text-xs text-emeraldMoney transition-all";
+                if(tab5Input) tab5Input.value = state.apiKey;
+            } else {
+                statusBtnText.innerText = "API: Not Set";
+                statusBtn.className = "flex items-center gap-2 bg-cardBg border border-crimson/40 hover:border-crimson px-3 py-1.5 rounded-full text-xs text-crimson transition-all";
+            }
+        }
+
+        function openApiKeyModal() { document.getElementById('apiKeyModal').classList.remove('hidden'); }
+        function closeApiKeyModal() { document.getElementById('apiKeyModal').classList.add('hidden'); }
+
+        function saveApiKeyModal() {
+            const val = document.getElementById('modalApiKeyInput').value.trim();
+            if(val) {
+                state.apiKey = val;
+                localStorage.setItem('learnwtf_api_key', val);
+                updateApiKeyUI();
+                closeApiKeyModal();
+                showToast("OpenAI Key saved successfully!", "success");
+            }
+        }
+
+        function saveApiKeyTab5() {
+            const val = document.getElementById('tab5-apikey-input').value.trim();
+            if(val) {
+                state.apiKey = val;
+                localStorage.setItem('learnwtf_api_key', val);
+                updateApiKeyUI();
+                showToast("OpenAI Key updated in Local Vault!", "success");
+            }
+        }
+
+        // ==========================================
+        // TAB 1: VAULT & AUTO-RENAMER LOGIC
+        // ==========================================
+        function triggerFileInput() {
+            document.getElementById('cloudFileInput').click();
+        }
+
+        function handleFileUpload(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            Array.from(files).forEach((file, i) => {
+                const ext = file.name.split('.').pop().toLowerCase();
+                let type = 'document';
+                if (['mp3', 'wav', 'aac', 'm4a'].includes(ext)) type = 'mp3';
+                else if (['mp4', 'mov', 'avi', 'mkv'].includes(ext)) type = 'mp4';
+                else if (['png', 'jpg', 'jpeg', 'webp', 'svg'].includes(ext)) type = 'picture';
+
+                // SMART AUTO-RENAMER SIMULATION ENGINE
+                const smartPrefixes = {
+                    mp3: 'Podcast_Episode_Raw_',
+                    mp4: 'Masterclass_Recording_',
+                    picture: 'Finance_Visual_Chart_',
+                    document: 'Knowledge_Syllabus_Doc_'
+                };
+                const smartName = `${smartPrefixes[type]}${Math.floor(Math.random() * 90 + 10)}_${file.name.replace(/\.[^/.]+$/, "")}.${ext}`;
+
+                const newVaultFile = {
+                    id: 'f_' + Date.now() + i,
+                    rawName: file.name,
+                    smartName: smartName,
+                    type: type,
+                    access: 'public',
+                    date: new Date().toISOString().split('T')[0],
+                    size: (file.size / (1024 * 1024)).toFixed(1) + ' MB',
+                    context: `Auto-indexed document saved locally in Knowledge Vault.`
+                };
+                state.vaultFiles.unshift(newVaultFile);
+            });
+
+            saveStateToLocal();
+            renderVaultFiles();
+            showToast(`Uploaded & Auto-Renamed ${files.length} file(s) into Knowledge Vault!`, "success");
+            
+            // Dynamically refresh ideas based on new uploads
+            refreshTrendingIdeas();
+        }
+
+        function deleteVaultFile(fileId) {
+            state.vaultFiles = state.vaultFiles.filter(f => f.id !== fileId);
+            saveStateToLocal();
+            renderVaultFiles();
+            showToast("File removed from Knowledge Vault.", "crimson");
+        }
+
+        function filterVault(filterType) {
+            state.activeVaultFilter = filterType;
+            document.querySelectorAll('.vault-filter-btn').forEach(btn => {
+                btn.className = "vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white";
+            });
+            document.getElementById(`vault-filter-${filterType}`).className = "vault-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-gold/20 text-gold border border-gold/40";
+            renderVaultFiles();
+        }
+
+        function toggleFileAccess(fileId) {
+            const file = state.vaultFiles.find(f => f.id === fileId);
+            if (file) {
+                file.access = file.access === 'public' ? 'private' : 'public';
+                saveStateToLocal();
+                renderVaultFiles();
+                showToast(`File set to ${file.access.toUpperCase()} access mode.`, file.access === 'public' ? 'success' : 'crimson');
+            }
+        }
+
+        function convertFileToTask(fileId) {
+            const file = state.vaultFiles.find(f => f.id === fileId);
+            if (!file) return;
+
+            const newTask = {
+                id: 't_' + Date.now(),
+                title: `Review Vault Doc: ${file.smartName}`,
+                category: file.type === 'mp3' || file.type === 'mp4' ? 'Podcast' : 'School',
+                date: new Date().toISOString().split('T')[0],
+                completed: false,
+                notes: `Generated from Vault file (${file.size}). Context: ${file.context}`
+            };
+            state.tasks.unshift(newTask);
+            saveStateToLocal();
+            renderTasks();
+            renderCalendar();
+            showToast(`Converted "${file.smartName}" to Task in Tab 2!`, "success");
+        }
+
+        function renderVaultFiles() {
+            const container = document.getElementById('vault-file-list');
+            document.getElementById('file-count-display').innerText = state.vaultFiles.length;
+
+            const filtered = state.vaultFiles.filter(f => state.activeVaultFilter === 'all' || f.type === state.activeVaultFilter);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-8">No files matching this category in Knowledge Vault.</p>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(f => {
+                let typeIcon = 'fa-file-lines text-slate-400';
+                let badgeClass = 'bg-slate-800 text-slate-300';
+                if (f.type === 'mp3') { typeIcon = 'fa-file-audio text-gold'; badgeClass = 'bg-gold/10 text-gold border border-gold/30'; }
+                else if (f.type === 'mp4') { typeIcon = 'fa-file-video text-crimson'; badgeClass = 'bg-crimson/10 text-crimson border border-crimson/30'; }
+                else if (f.type === 'picture') { typeIcon = 'fa-file-image text-emeraldMoney'; badgeClass = 'bg-emeraldMoney/10 text-emeraldMoney border border-emeraldMoney/30'; }
+
+                const isPublic = f.access === 'public';
+
+                return `
+                <div class="bg-cardBg border border-panelBorder hover:border-gold/30 p-3.5 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-obsidian border border-panelBorder flex items-center justify-center shrink-0">
+                            <i class="fa-solid ${typeIcon} text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h4 class="text-xs font-bold text-white font-mono">${f.smartName}</h4>
+                                <span class="text-[9px] px-2 py-0.5 rounded-full ${badgeClass} uppercase font-semibold">${f.type}</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mt-0.5">Raw Original: <span class="italic text-slate-500">${f.rawName}</span> &bull; ${f.size} &bull; ${f.date}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 self-end sm:self-center">
+                        <!-- Access Toggle Button -->
+                        <button onclick="toggleFileAccess('${f.id}')" class="px-2.5 py-1 rounded-xl text-[10px] font-bold flex items-center gap-1.5 transition-all ${isPublic ? 'bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40' : 'bg-crimson/20 text-crimson border border-crimson/40'}">
+                            <i class="fa-solid ${isPublic ? 'fa-globe' : 'fa-lock'}"></i>
+                            <span>${isPublic ? 'Public AI' : 'Private'}</span>
+                        </button>
+                        
+                        <!-- Convert to Task -->
+                        <button onclick="convertFileToTask('${f.id}')" title="Convert to Task" class="px-2.5 py-1 bg-panelBorder hover:bg-gold hover:text-obsidian text-slate-300 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-plus"></i> Task
+                        </button>
+
+                        <!-- Delete Upload Button -->
+                        <button onclick="deleteVaultFile('${f.id}')" title="Delete Upload" class="px-2.5 py-1 bg-panelBorder hover:bg-crimson hover:text-white text-slate-400 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Vault Chatbot Handler
+        function handleVaultChat(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-input-field');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const chatMessages = document.getElementById('chat-messages');
+
+            // User Message
+            chatMessages.innerHTML += `
+                <div class="bg-obsidian/80 rounded-xl p-3 border border-panelBorder text-xs text-right">
+                    <p class="text-slate-400 font-semibold mb-1">You</p>
+                    <p class="text-white">${query}</p>
+                </div>
+            `;
+
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Generate Mock AI Response based on Public Files
+            setTimeout(() => {
+                const publicFiles = state.vaultFiles.filter(f => f.access === 'public');
+                const fileNames = publicFiles.map(f => f.smartName).join(', ');
+                
+                chatMessages.innerHTML += `
+                    <div class="bg-panelBorder/40 rounded-xl p-3 border border-gold/30 text-xs">
+                        <p class="text-gold font-bold mb-1 flex items-center gap-1">
+                            <i class="fa-solid fa-sparkles"></i> Vault AI Assistant
+                        </p>
+                        <p class="text-slate-200">Based on indexed public files (<em>${fileNames || 'None'}</em>):</p>
+                        <p class="text-slate-300 mt-1 italic">"Key takeaway regarding '${query}': Leverage high yield cashflows and automate your video clip workflows for 85%+ viral reach."</p>
+                    </div>
+                `;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 600);
+        }
+
+        // ==========================================
+        // TAB 2: TASKS & INTERACTIVE CALENDAR
+        // ==========================================
+        function openAddTaskModal() { document.getElementById('addTaskModal').classList.remove('hidden'); }
+        function closeAddTaskModal() { document.getElementById('addTaskModal').classList.add('hidden'); }
+
+        function handleCreateTaskSubmit(event) {
+            event.preventDefault();
+            const title = document.getElementById('newTaskTitle').value;
+            const category = document.getElementById('newTaskCategory').value;
+            const date = document.getElementById('newTaskDate').value;
+            const notes = document.getElementById('newTaskNotes').value;
+
+            const newTask = {
+                id: 't_' + Date.now(),
+                title,
+                category,
+                date,
+                completed: false,
+                notes
+            };
+
+            state.tasks.unshift(newTask);
+            saveStateToLocal();
+            renderTasks();
+            renderCalendar();
+            closeAddTaskModal();
+            showToast("New task created!", "success");
+        }
+
+        function toggleTaskStatus(taskId) {
+            const task = state.tasks.find(t => t.id === taskId);
+            if (task) {
+                task.completed = !task.completed;
+                saveStateToLocal();
+                renderTasks();
+                renderCalendar();
+            }
+        }
+
+        function deleteTask(taskId) {
+            state.tasks = state.tasks.filter(t => t.id !== taskId);
+            saveStateToLocal();
+            renderTasks();
+            renderCalendar();
+            showToast("Task deleted.", "crimson");
+        }
+
+        function filterTasks(cat) {
+            state.activeTaskFilter = cat;
+            renderTasks();
+        }
+
+        function renderTasks() {
+            const container = document.getElementById('tasks-container');
+            const filtered = state.tasks.filter(t => state.activeTaskFilter === 'all' || t.category === state.activeTaskFilter);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-8">No tasks in this category.</p>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(t => {
+                let badgeClass = 'bg-gold/20 text-gold border-gold/40';
+                if (t.category === 'School') badgeClass = 'bg-emeraldMoney/20 text-emeraldMoney border-emeraldMoney/40';
+                if (t.category === 'Podcast') badgeClass = 'bg-crimson/20 text-crimson border-crimson/40';
+
+                return `
+                <div class="bg-obsidian border border-panelBorder hover:border-gold/30 p-3.5 rounded-xl flex items-center justify-between gap-3 transition-all ${t.completed ? 'opacity-50' : ''}">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskStatus('${t.id}')" class="accent-gold w-4 h-4 rounded cursor-pointer">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-xs font-bold text-white ${t.completed ? 'line-through text-slate-500' : ''}">${t.title}</h4>
+                                <span class="text-[9px] px-2 py-0.2 rounded border ${badgeClass} font-semibold">${t.category}</span>
+                            </div>
+                            ${t.notes ? `<p class="text-[10px] text-slate-400 mt-0.5">${t.notes}</p>` : ''}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-[10px] text-slate-400 font-mono"><i class="fa-solid fa-clock text-gold"></i> ${t.date}</span>
+                        <button onclick="deleteTask('${t.id}')" class="text-slate-500 hover:text-crimson text-xs"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendar-days-grid');
+            const deadlinePreview = document.getElementById('calendar-deadlines-preview');
+            grid.innerHTML = '';
+
+            // Generate 31 days for current month (November 2026)
+            for (let day = 1; day <= 30; day++) {
+                const dayStr = `2026-11-${day < 10 ? '0' + day : day}`;
+                const hasTasks = state.tasks.filter(t => t.date === dayStr);
+
+                let dotHtml = '';
+                if (hasTasks.length > 0) {
+                    dotHtml = `<div class="flex justify-center gap-0.5 mt-1">`;
+                    hasTasks.forEach(t => {
+                        let color = 'bg-gold';
+                        if (t.category === 'School') color = 'bg-emeraldMoney';
+                        if (t.category === 'Podcast') color = 'bg-crimson';
+                        dotHtml += `<span class="w-1.5 h-1.5 rounded-full ${color}"></span>`;
+                    });
+                    dotHtml += `</div>`;
+                }
+
+                grid.innerHTML += `
+                    <div class="p-2 rounded-xl border border-panelBorder/50 bg-obsidian/60 min-h-[42px] flex flex-col justify-between hover:border-gold/50 cursor-pointer">
+                        <span class="text-[10px] text-slate-300 font-bold">${day}</span>
+                        ${dotHtml}
+                    </div>
+                `;
+            }
+
+            // Render upcoming deadlines
+            const upcoming = state.tasks.filter(t => !t.completed).slice(0, 3);
+            if (upcoming.length === 0) {
+                deadlinePreview.innerHTML = `<p class="text-slate-500 italic">No upcoming pending deadlines.</p>`;
+            } else {
+                deadlinePreview.innerHTML = upcoming.map(t => `
+                    <div class="flex items-center justify-between bg-obsidian p-2 rounded-lg border border-panelBorder">
+                        <span class="text-slate-200 truncate max-w-[200px]">${t.title}</span>
+                        <span class="text-gold font-mono text-[10px]">${t.date}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ==========================================
+        // TAB 3: AI VIDEO STUDIO & VIRAL CLIPPER
+        // ==========================================
+        function triggerStudioUpload() {
+            document.getElementById('studioFileInput').click();
+        }
+
+        function handleStudioUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            showToast(`Imported "${file.name}" (Up to 2h supported)`, "success");
+            runStudioClipper();
+        }
+
+        function runStudioClipper() {
+            const btn = document.getElementById('runClipperBtn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Processing Silence Stripper & Virality Engine...`;
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Generate Viral Shorts & Full Video`;
+                btn.disabled = false;
+                
+                // Add mock clip if needed
+                state.viralShorts.unshift({
+                    id: 's_' + Date.now(),
+                    title: 'Automate Wealth While You Sleep (9:16 Edit)',
+                    virality: 96,
+                    duration: '00:38',
+                    hook: 'Ultra High Virality',
+                    viewsEst: '1.5M+'
+                });
+
+                renderStudioShorts();
+                showToast("Generated 3+ Viral Shorts with >= 85% Virality!", "success");
+            }, 1200);
+        }
+
+        function renderStudioShorts() {
+            const container = document.getElementById('shorts-list-container');
+            container.innerHTML = state.viralShorts.map((short, idx) => {
+                const isSelected = idx === state.selectedShortIndex;
+                return `
+                <div onclick="selectShortClip(${idx})" class="p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 ${isSelected ? 'bg-gold/15 border-gold shadow-lg' : 'bg-obsidian border-panelBorder hover:border-gold/40'}">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-lg bg-crimson/20 border border-crimson/40 text-crimson flex items-center justify-center font-bold text-xs">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-white leading-tight">${short.title}</h5>
+                            <span class="text-[10px] text-slate-400">Duration: ${short.duration} &bull; Est: ${short.viewsEst}</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40">
+                            ${short.virality}% Score
+                        </span>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            // Update Phone Preview text
+            const activeShort = state.viralShorts[state.selectedShortIndex];
+            if (activeShort) {
+                document.getElementById('current-preview-title').innerText = activeShort.title;
+                document.getElementById('preview-virality-badge').innerText = `Virality Score: ${activeShort.virality}%`;
+                document.getElementById('phone-caption-preview').innerText = `"${activeShort.title.toUpperCase()}"`;
+            }
+        }
+
+        function selectShortClip(index) {
+            state.selectedShortIndex = index;
+            renderStudioShorts();
+        }
+
+        function handleVideoEditPrompt(event) {
+            event.preventDefault();
+            const input = document.getElementById('video-edit-input');
+            const txt = input.value.trim();
+            if (!txt) return;
+
+            const log = document.getElementById('video-prompt-log');
+            log.innerHTML += `<p class="text-gold"><i class="fa-solid fa-sparkles"></i> AI Executed: "${txt}"</p>`;
+            input.value = '';
+            log.scrollTop = log.scrollHeight;
+            showToast("Video visual tweaks applied!", "success");
+        }
+
+        function downloadCurrentVideo() {
+            showToast("Downloading HD 9:16 Video Master...", "success");
+        }
+
+        function transferToScheduler() {
+            const activeShort = state.viralShorts[state.selectedShortIndex];
+            if (!activeShort) return;
+
+            const queueItem = {
+                id: 'pq_' + Date.now(),
+                title: activeShort.title,
+                virality: activeShort.virality,
+                caption: `🔥 ${activeShort.title}! Learn the exact steps to build cashflows in 2026. Follow @LearnWTF for daily wealth insights. 💸`,
+                hashtags: '#LearnWTF #FinancialFreedom #WealthBuilding #Shorts #ViralReels'
+            };
+
+            state.publisherQueue.unshift(queueItem);
+            renderPublisherQueue();
+            switchTab('tab-scheduler');
+            showToast(`Transferred "${activeShort.title}" to Tab 4 Post Scheduler!`, "success");
+        }
+
+        // ==========================================
+        // TAB 4: AUTO-SCHEDULER & PUBLISHER
+        // ==========================================
+        function toggleAccount(platform) {
+            const el = document.getElementById(`status-${platform}`);
+            if (el.innerText === 'Connected') {
+                el.innerText = 'Disconnected';
+                el.className = 'text-[10px] text-crimson';
+            } else {
+                el.innerText = 'Connected';
+                el.className = 'text-[10px] text-emeraldMoney';
+            }
+        }
+
+        function renderPublisherQueue() {
+            const container = document.getElementById('publisher-queue-list');
+            document.getElementById('queue-count-badge').innerHTML = `<strong>${state.publisherQueue.length}</strong> Clips Queued for Posting`;
+
+            if (state.publisherQueue.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-8">Queue empty. Transfer clips from Tab 3.</p>`;
+                return;
+            }
+
+            container.innerHTML = state.publisherQueue.map((item, idx) => {
+                const isSelected = idx === state.selectedQueueIndex;
+                return `
+                <div onclick="selectQueueItem(${idx})" class="p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 ${isSelected ? 'bg-gold/15 border-gold shadow-lg' : 'bg-obsidian border-panelBorder hover:border-gold/30'}">
+                    <div>
+                        <h5 class="text-xs font-bold text-white">${item.title}</h5>
+                        <p class="text-[10px] text-emeraldMoney mt-0.5">Ready for TikTok, IG, YT, FB</p>
+                    </div>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/40 font-bold">${item.virality}% Virality</span>
+                </div>
+                `;
+            }).join('');
+
+            // Load active item into fields
+            const active = state.publisherQueue[state.selectedQueueIndex];
+            if (active) {
+                document.getElementById('post-caption-input').value = active.caption;
+                document.getElementById('post-hashtags-input').value = active.hashtags;
+            }
+        }
+
+        function selectQueueItem(idx) {
+            state.selectedQueueIndex = idx;
+            renderPublisherQueue();
+        }
+
+        function generateFreshCaptions() {
+            const captions = [
+                "🚨 Paper money loses value while asset holders get rich. Here is how to position yourself in 2026. Comment 'WEALTH' for full vault access! 📈💰",
+                "The secret tax strategies taught in private Ivy League lectures. Here is how top 1% investors protect their capital legally! 🛡️⚡",
+                "Stop saving cash in a standard bank account. Here are 3 alternative cashflow vehicles producing passive income today! 💸🔥"
+            ];
+            const rand = captions[Math.floor(Math.random() * captions.length)];
+            document.getElementById('post-caption-input').value = rand;
+            showToast("Generated new 9:16 mobile-optimized caption!", "success");
+        }
+
+        function publishNowAction() {
+            showToast("Post Published Immediately to TikTok, IG Reels, YT Shorts, FB Reels!", "success");
+        }
+
+        function schedulePostAction() {
+            const date = document.getElementById('schedule-date-input').value || '2026-11-12';
+            const time = document.getElementById('schedule-time-input').value || '18:30';
+            showToast(`Post scheduled for ${date} at ${time}!`, "success");
+        }
+
+        function downloadActivePostVideo() {
+            showToast("Downloading completed HD Video & Reels...", "success");
+        }
+
+        // ==========================================
+        // TAB 5: NICHE TRENDING CONTENT ENGINE
+        // ==========================================
+        function renderTrendingIdeas() {
+            const container = document.getElementById('trending-ideas-container');
+            if (!container) return;
+
+            if (state.trendingIdeas.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-8">No trending ideas generated yet.</p>`;
+                return;
+            }
+
+            container.innerHTML = state.trendingIdeas.map((idea, idx) => `
+                <div class="bg-obsidian border border-panelBorder hover:border-gold/40 p-3.5 rounded-xl space-y-2 transition-all">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold/10 text-gold border border-gold/30">${idea.category}</span>
+                        <span class="text-[10px] font-bold text-crimson flex items-center gap-1">
+                            <i class="fa-solid fa-fire text-xs"></i> ${idea.trendScore}
+                        </span>
+                    </div>
+                    <h4 class="text-xs font-bold text-white font-serif">${idea.title}</h4>
+                    <p class="text-[11px] text-slate-400 italic bg-panelBorder/30 p-2 rounded-lg border border-panelBorder/50">${idea.scriptHook}</p>
+                    <div class="flex justify-end pt-1">
+                        <button onclick="createTaskFromIdea('${idea.id}')" class="px-3 py-1 bg-panelBorder hover:bg-gold hover:text-obsidian text-slate-300 text-[10px] font-bold rounded-lg transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-plus"></i> Add to Tasks
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function refreshTrendingIdeas() {
+            const freshIdeas = [
+                { id: 'i_' + Date.now() + '_1', title: 'The Hidden Cost of Holding Cash in 2026', category: 'Wealth Strategy', trendScore: '99% Trending', scriptHook: '"If you have more than $10k in a standard savings account, you are effectively burning money..."' },
+                { id: 'i_' + Date.now() + '_2', title: '3 Corporate Entities Every Creator Needs', category: 'Legal & School', trendScore: '96% Trending', scriptHook: '"Filing an LLC isn\'t enough. Here is how top podcasters structure holding companies..."' },
+                { id: 'i_' + Date.now() + '_3', title: 'Why 15-Minute Videos Are the Goldmine of 2026', category: 'Podcast & Shorts', trendScore: '93% Trending', scriptHook: '"Long-form establishes trust, but 9:16 vertical shorts build scale. Here is the dual engine..."' }
+            ];
+            state.trendingIdeas = freshIdeas;
+            renderTrendingIdeas();
+            showToast("Niche content trends updated!", "success");
+        }
+
+        function createTaskFromIdea(ideaId) {
+            const idea = state.trendingIdeas.find(i => i.id === ideaId);
+            if (!idea) return;
+
+            const newTask = {
+                id: 't_' + Date.now(),
+                title: `Produce Video: ${idea.title}`,
+                category: 'Podcast',
+                date: new Date().toISOString().split('T')[0],
+                completed: false,
+                notes: `Script Hook: ${idea.scriptHook}`
+            };
+            state.tasks.unshift(newTask);
+            renderTasks();
+            renderCalendar();
+            showToast(`Added "${idea.title}" to Tab 2 Tasks!`, "success");
+        }
+
+        // ==========================================
+        // TAB 6: COST ESTIMATOR LOGIC
+        // ==========================================
+        function calculateCosts() {
+            const model = document.getElementById('costModelSelect').value;
+            const videoMins = parseFloat(document.getElementById('videoMinInput').value) || 0;
+            const promptsCount = parseFloat(document.getElementById('promptsInput').value) || 0;
+            const shortsCount = parseFloat(document.getElementById('shortsCountInput').value) || 0;
+
+            // UI Label updates
+            document.getElementById('video-min-display').innerText = `${videoMins} mins/mo`;
+            document.getElementById('prompts-count-display').innerText = `${promptsCount} queries/mo`;
+            document.getElementById('shorts-count-display').innerText = `${shortsCount} clips/mo`;
+
+            // OpenAI Pricing Rules (as of 2026 standard rates)
+            // Whisper AI: $0.006 per minute
+            const whisperCost = videoMins * 0.006;
+
+            // Model token pricing (per 1M tokens)
+            let inputPrice = 2.50; // default gpt-4o
+            let outputPrice = 10.00;
+            let badgeText = "GPT-4o ($2.50 / $10.00 per 1M tokens)";
+
+            if (model === 'gpt-4o-mini') {
+                inputPrice = 0.15;
+                outputPrice = 0.60;
+                badgeText = "GPT-4o-mini ($0.15 / $0.60 per 1M tokens)";
+            } else if (model === 'gpt-4-turbo') {
+                inputPrice = 10.00;
+                outputPrice = 30.00;
+                badgeText = "GPT-4 Turbo ($10.00 / $30.00 per 1M tokens)";
+            }
+            document.getElementById('model-pricing-badge').innerText = badgeText;
+
+            // Vault Chat: Avg 1,500 input tokens + 300 output tokens per prompt query
+            const vaultTokensInput = promptsCount * 1500;
+            const vaultTokensOutput = promptsCount * 300;
+            const vaultCost = ((vaultTokensInput / 1000000) * inputPrice) + ((vaultTokensOutput / 1000000) * outputPrice);
+
+            // Shorts / Captions / Virality Engine: Avg 2,500 input + 600 output tokens per generated short
+            const shortsTokensInput = shortsCount * 2500;
+            const shortsTokensOutput = shortsCount * 600;
+            const shortsCost = ((shortsTokensInput / 1000000) * inputPrice) + ((shortsTokensOutput / 1000000) * outputPrice);
+
+            const totalApiCost = whisperCost + vaultCost + shortsCost;
+            const saasCost = 72.00; // Benchmark total SaaS Stack (Opus + Notion AI + Buffer + Descript)
+            const monthlySavings = Math.max(0, saasCost - totalApiCost);
+
+            // Render Cost Calculations
+            document.getElementById('total-api-cost-display').innerText = `$${totalApiCost.toFixed(2)}`;
+            document.getElementById('breakdown-whisper').innerText = `$${whisperCost.toFixed(2)}`;
+            document.getElementById('breakdown-vault').innerText = `$${vaultCost.toFixed(2)}`;
+            document.getElementById('breakdown-shorts').innerText = `$${shortsCost.toFixed(2)}`;
+
+            document.getElementById('header-monthly-savings').innerText = `$${monthlySavings.toFixed(2)}/mo`;
+            document.getElementById('card-savings-display').innerText = `$${monthlySavings.toFixed(2)} / mo`;
+        }
+
+        function setCostPreset(type) {
+            if (type === 'casual') {
+                document.getElementById('videoMinInput').value = 45;
+                document.getElementById('promptsInput').value = 50;
+                document.getElementById('shortsCountInput').value = 10;
+            } else if (type === 'pro') {
+                document.getElementById('videoMinInput').value = 240;
+                document.getElementById('promptsInput').value = 250;
+                document.getElementById('shortsCountInput').value = 45;
+            } else if (type === 'agency') {
+                document.getElementById('videoMinInput').value = 800;
+                document.getElementById('promptsInput').value = 600;
+                document.getElementById('shortsCountInput').value = 150;
+            }
+            calculateCosts();
+            showToast(`Applied '${type.toUpperCase()}' usage preset!`, 'success');
+        }
+    </script>
+</body>
+</html>
