@@ -146,14 +146,14 @@
 
             <!-- Status Badges & Key Config -->
             <div class="flex items-center gap-3">
-                <!-- iCloud Status -->
-                <div class="flex items-center gap-2 bg-cardBg border border-emeraldMoney/30 px-3 py-1.5 rounded-full text-xs" title="iCloud Integration Active">
+                <!-- Local Storage Status -->
+                <div class="flex items-center gap-2 bg-cardBg border border-emeraldMoney/30 px-3 py-1.5 rounded-full text-xs" title="Local Vault Storage Active">
                     <span class="relative flex h-2 w-2">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emeraldMoney opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-emeraldMoney"></span>
                     </span>
-                    <i class="fa-brands fa-apple text-slate-300"></i>
-                    <span class="text-emeraldMoney font-medium text-[11px]">iCloud Sync</span>
+                    <i class="fa-solid fa-hard-drive text-slate-300"></i>
+                    <span class="text-emeraldMoney font-medium text-[11px]">Local Vault</span>
                 </div>
 
                 <!-- API Key Status Toggle -->
@@ -176,15 +176,15 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-panelBorder pb-4">
                 <div>
                     <h2 class="text-2xl font-serif font-bold text-white flex items-center gap-2">
-                        <span>iCloud Knowledge Vault</span>
+                        <span>Knowledge Vault</span>
                         <span class="text-xs font-sans px-2.5 py-0.5 rounded-full bg-emeraldMoney/20 text-emeraldMoney border border-emeraldMoney/30">Auto-Renamer Active</span>
                     </h2>
-                    <p class="text-xs text-slate-400">Files synced to iCloud are auto-renamed by AI content analysis and categorized for your personal AI chatbot.</p>
+                    <p class="text-xs text-slate-400">Uploaded files are auto-renamed by AI content analysis, saved locally, and categorized for your personal AI chatbot.</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <span class="text-xs text-slate-400"><strong class="text-gold" id="file-count-display">4</strong> Files Stored</span>
                     <button onclick="triggerFileInput()" class="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-obsidian font-bold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload to iCloud Hub
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload to Vault
                     </button>
                     <input type="file" id="cloudFileInput" class="hidden" multiple onchange="handleFileUpload(event)">
                 </div>
@@ -704,7 +704,7 @@
                         </ol>
                         <div class="p-2.5 rounded-xl bg-obsidian border border-emeraldMoney/30 text-[11px] text-emeraldMoney flex items-center gap-2 mt-2">
                             <i class="fa-solid fa-lock text-sm"></i>
-                            <span>All uploads and data stay client-side or in your personal iCloud sync.</span>
+                            <span>All uploads and data stay safely saved in your personal browser vault.</span>
                         </div>
                     </div>
                 </div>
@@ -885,15 +885,15 @@
             activeTab: 'tab-knowledge',
             activeVaultFilter: 'all',
             activeTaskFilter: 'all',
-            // Pre-populated iCloud Vault Files
-            vaultFiles: [
+            // Pre-populated Vault Files (Loaded from localStorage if available)
+            vaultFiles: JSON.parse(localStorage.getItem('learnwtf_vault_files')) || [
                 { id: 'f1', rawName: 'podcast_raw_01.mp3', smartName: 'Episode_42_Wealth_Hacks.mp3', type: 'mp3', access: 'public', date: '2026-11-08', size: '48.2 MB', context: 'Deep dive into passive income streams and asset allocation strategy.' },
-                { id: 'f2', rawName: 'video_shoot_final.mp4', smartName: 'Masterclass_Seductive_Finance_v1.mp4', type: 'mp4', access: 'public', date: '2026-11-09', size: '1.2 GB', duration: '01:42:15', context: '2 hour lecture covering market psychology and option leverage.' },
+                { id: 'f2', rawName: 'video_shoot_final.mp4', smartName: 'Masterclass_Finance_Strategy_v1.mp4', type: 'mp4', access: 'public', date: '2026-11-09', size: '1.2 GB', duration: '01:42:15', context: '2 hour lecture covering market psychology and option leverage.' },
                 { id: 'f3', rawName: 'IMG_8842.png', smartName: 'Luxury_Portfolio_Breakdown_Graph.png', type: 'picture', access: 'private', date: '2026-11-07', size: '4.1 MB', context: 'Infographic of asset distribution.' },
                 { id: 'f4', rawName: 'notes_lecture_3.docx', smartName: 'Syllabus_Real_Estate_Structuring.docx', type: 'document', access: 'public', date: '2026-11-05', size: '820 KB', context: 'School lecture notes on entity formation and asset protection.' }
             ],
-            // Tasks State
-            tasks: [
+            // Tasks State (Loaded from localStorage if available)
+            tasks: JSON.parse(localStorage.getItem('learnwtf_tasks')) || [
                 { id: 't1', title: 'Finish School Project: Tax Code Case Study', category: 'School', date: '2026-11-12', completed: false, notes: 'Analyze Section 1031 exchange precedents.' },
                 { id: 't2', title: 'Edit & Export Podcast Ep #43 Video Clips', category: 'Podcast', date: '2026-11-11', completed: false, notes: 'Focus on 9:16 vertical hooks for TikTok.' },
                 { id: 't3', title: 'Review Q4 Wealth Portfolio Allocation', category: 'Work', date: '2026-11-15', completed: true, notes: 'Rebalance high yield dividend assets.' }
@@ -932,6 +932,15 @@
         });
 
         // TOAST NOTIFICATION UTILITY
+        function saveStateToLocal() {
+            try {
+                localStorage.setItem('learnwtf_vault_files', JSON.stringify(state.vaultFiles));
+                localStorage.setItem('learnwtf_tasks', JSON.stringify(state.tasks));
+            } catch (e) {
+                console.warn('Local storage quota exceeded:', e);
+            }
+        }
+
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -1031,7 +1040,7 @@
                 const smartPrefixes = {
                     mp3: 'Podcast_Episode_Raw_',
                     mp4: 'Masterclass_Recording_',
-                    picture: 'Seductive_Finance_Visual_',
+                    picture: 'Finance_Visual_Chart_',
                     document: 'Knowledge_Syllabus_Doc_'
                 };
                 const smartName = `${smartPrefixes[type]}${Math.floor(Math.random() * 90 + 10)}_${file.name.replace(/\.[^/.]+$/, "")}.${ext}`;
@@ -1044,16 +1053,24 @@
                     access: 'public',
                     date: new Date().toISOString().split('T')[0],
                     size: (file.size / (1024 * 1024)).toFixed(1) + ' MB',
-                    context: `Auto-indexed document uploaded via iCloud integration.`
+                    context: `Auto-indexed document saved locally in Knowledge Vault.`
                 };
                 state.vaultFiles.unshift(newVaultFile);
             });
 
+            saveStateToLocal();
             renderVaultFiles();
-            showToast(`Uploaded & Auto-Renamed ${files.length} file(s) into iCloud Hub!`, "success");
+            showToast(`Uploaded & Auto-Renamed ${files.length} file(s) into Knowledge Vault!`, "success");
             
             // Dynamically refresh ideas based on new uploads
             refreshTrendingIdeas();
+        }
+
+        function deleteVaultFile(fileId) {
+            state.vaultFiles = state.vaultFiles.filter(f => f.id !== fileId);
+            saveStateToLocal();
+            renderVaultFiles();
+            showToast("File removed from Knowledge Vault.", "crimson");
         }
 
         function filterVault(filterType) {
@@ -1069,6 +1086,7 @@
             const file = state.vaultFiles.find(f => f.id === fileId);
             if (file) {
                 file.access = file.access === 'public' ? 'private' : 'public';
+                saveStateToLocal();
                 renderVaultFiles();
                 showToast(`File set to ${file.access.toUpperCase()} access mode.`, file.access === 'public' ? 'success' : 'crimson');
             }
@@ -1084,9 +1102,10 @@
                 category: file.type === 'mp3' || file.type === 'mp4' ? 'Podcast' : 'School',
                 date: new Date().toISOString().split('T')[0],
                 completed: false,
-                notes: `Generated from iCloud file (${file.size}). Context: ${file.context}`
+                notes: `Generated from Vault file (${file.size}). Context: ${file.context}`
             };
             state.tasks.unshift(newTask);
+            saveStateToLocal();
             renderTasks();
             renderCalendar();
             showToast(`Converted "${file.smartName}" to Task in Tab 2!`, "success");
@@ -1099,7 +1118,7 @@
             const filtered = state.vaultFiles.filter(f => state.activeVaultFilter === 'all' || f.type === state.activeVaultFilter);
 
             if (filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-8">No files matching this category in iCloud Vault.</p>`;
+                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-8">No files matching this category in Knowledge Vault.</p>`;
                 return;
             }
 
@@ -1137,6 +1156,11 @@
                         <!-- Convert to Task -->
                         <button onclick="convertFileToTask('${f.id}')" title="Convert to Task" class="px-2.5 py-1 bg-panelBorder hover:bg-gold hover:text-obsidian text-slate-300 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
                             <i class="fa-solid fa-plus"></i> Task
+                        </button>
+
+                        <!-- Delete Upload Button -->
+                        <button onclick="deleteVaultFile('${f.id}')" title="Delete Upload" class="px-2.5 py-1 bg-panelBorder hover:bg-crimson hover:text-white text-slate-400 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
                 </div>
@@ -1205,6 +1229,7 @@
             };
 
             state.tasks.unshift(newTask);
+            saveStateToLocal();
             renderTasks();
             renderCalendar();
             closeAddTaskModal();
@@ -1215,6 +1240,7 @@
             const task = state.tasks.find(t => t.id === taskId);
             if (task) {
                 task.completed = !task.completed;
+                saveStateToLocal();
                 renderTasks();
                 renderCalendar();
             }
@@ -1222,6 +1248,7 @@
 
         function deleteTask(taskId) {
             state.tasks = state.tasks.filter(t => t.id !== taskId);
+            saveStateToLocal();
             renderTasks();
             renderCalendar();
             showToast("Task deleted.", "crimson");
