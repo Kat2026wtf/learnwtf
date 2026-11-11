@@ -435,45 +435,57 @@
                         <!-- Player Container with simulated media frame -->
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                             
-                            <!-- Phone Frame Mockup for Vertical 9:16 Preview -->
-                            <div class="md:col-span-5 flex justify-center">
-                                <div class="phone-frame flex flex-col justify-between p-4">
-                                    <div class="phone-notch"></div>
+                            <!-- Adaptive Phone / Widescreen Frame Mockup -->
+                            <div class="md:col-span-5 flex flex-col items-center justify-center">
+                                <div id="studio-frame-wrapper" class="phone-frame flex flex-col justify-between p-3 group transition-all duration-300">
+                                    <div id="studio-phone-notch" class="phone-notch"></div>
                                     <!-- Dynamic Video Simulation Canvas / Real HTML5 Video Player -->
-                                    <div id="phone-screen-content" class="h-full w-full rounded-2xl bg-gradient-to-b from-purple-900/40 via-obsidian to-black border border-gold/20 flex flex-col justify-between p-3 relative overflow-hidden mt-2">
-                                        <!-- Real HTML5 Video Element (Hidden until user uploads a video) -->
+                                    <div id="phone-screen-content" onclick="toggleStudioVideoPlay()" class="h-full w-full rounded-2xl bg-gradient-to-b from-zinc-900 via-obsidian to-black border border-gold/20 flex flex-col justify-between p-3 relative overflow-hidden mt-1 cursor-pointer select-none">
+                                        <!-- Real HTML5 Video Element -->
                                         <video id="studio-video-player" class="hidden absolute inset-0 w-full h-full object-cover z-0" playsinline loop></video>
                                         <!-- Animated video bar overlay (Fallback when no video uploaded) -->
                                         <div id="studio-video-bg-pattern" class="absolute inset-0 opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px] animate-pulse"></div>
                                         
-                                        <!-- Top Badge inside phone -->
-                                        <div class="flex justify-between items-center z-10 pt-2">
-                                            <span id="phone-clip-badge" class="bg-crimson text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">🔥 Viral Clip</span>
-                                            <span id="phone-views-badge" class="text-[10px] text-gold font-bold bg-obsidian/70 px-2 py-0.5 rounded-full"><i class="fa-solid fa-eye"></i> Est. 850k+</span>
+                                        <!-- Subtle Top & Bottom Gradient Vignettes for Clean Readability -->
+                                        <div class="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/70 to-transparent pointer-events-none z-10"></div>
+                                        <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none z-10"></div>
+
+                                        <!-- Top Minimal Metadata Bar -->
+                                        <div class="flex justify-between items-center z-20 pt-2">
+                                            <span id="phone-clip-badge" class="bg-crimson/90 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow">🔥 Viral Short</span>
+                                            <span id="phone-views-badge" class="text-[10px] text-gold font-bold bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full border border-gold/20"><i class="fa-solid fa-eye"></i> 850k+</span>
                                         </div>
 
-                                        <!-- Center content text simulation & Play/Pause trigger -->
-                                        <div class="z-10 my-auto text-center space-y-2">
-                                            <button onclick="toggleStudioVideoPlay()" id="studio-play-btn" class="w-12 h-12 rounded-full bg-gold/80 hover:bg-gold border border-white text-obsidian mx-auto flex items-center justify-center shadow-lg transition-transform hover:scale-110">
-                                                <i id="studio-play-icon" class="fa-solid fa-play"></i>
-                                            </button>
-                                            <p id="phone-caption-preview" class="text-xs font-extrabold text-white bg-obsidian/75 backdrop-blur-sm rounded-lg py-1.5 px-2 leading-tight uppercase tracking-wider drop-shadow-md border border-gold/30">
-                                                "IF YOU WANT REAL WEALTH IN 2026, STOP SAVING PAPER MONEY!"
-                                            </p>
-                                        </div>
-
-                                        <!-- Phone Bottom Controls Simulation -->
-                                        <div class="z-10 space-y-1 bg-obsidian/70 backdrop-blur-sm p-2 rounded-xl">
-                                            <div class="flex items-center justify-between text-[10px] text-slate-300">
-                                                <span>@LearnWTF</span>
-                                                <span id="phone-timecode-display" class="text-emeraldMoney font-mono font-bold">00:00 / 00:45</span>
+                                        <!-- Center Play/Pause Button (Auto-hides while playing so face is never blocked) -->
+                                        <div id="studio-center-controls" class="z-20 my-auto flex items-center justify-center transition-opacity duration-200">
+                                            <div id="studio-play-btn" class="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md hover:bg-gold border border-gold/70 text-gold hover:text-obsidian flex items-center justify-center shadow-2xl transition-all transform hover:scale-110">
+                                                <i id="studio-play-icon" class="fa-solid fa-play text-base ml-0.5"></i>
                                             </div>
-                                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden cursor-pointer" onclick="seekStudioVideo(event)">
-                                                <div id="studio-progress-bar" class="bg-gold h-full w-1/3 transition-all duration-150"></div>
+                                        </div>
+
+                                        <!-- Lower-Third Dynamic Viral Captions & Progress Bar -->
+                                        <div class="z-20 space-y-2.5">
+                                            <!-- Clean Viral Subtitle (No bulky dark box covering face) -->
+                                            <div id="phone-caption-container" class="text-center px-2">
+                                                <span id="phone-caption-preview" class="inline-block text-sm font-black text-white uppercase tracking-wide leading-snug" style="text-shadow: 0 2px 10px rgba(0,0,0,0.95), 0 0 2px #000, 1px 1px 0 #000, -1px -1px 0 #000;">
+                                                    STOP SAVING <span class="text-gold">PAPER MONEY</span> IN 2026
+                                                </span>
+                                            </div>
+
+                                            <!-- Sleek Scrubber & Timecode -->
+                                            <div onclick="event.stopPropagation()" class="space-y-1 pt-1">
+                                                <div class="flex items-center justify-between text-[10px] text-slate-300 px-0.5">
+                                                    <span class="font-semibold text-white/90">@LearnWTF</span>
+                                                    <span id="phone-timecode-display" class="text-emeraldMoney font-mono font-bold">00:00 / 00:45</span>
+                                                </div>
+                                                <div class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden cursor-pointer hover:h-2 transition-all" onclick="seekStudioVideo(event)">
+                                                    <div id="studio-progress-bar" class="bg-gold h-full w-0 transition-all duration-150"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <p class="text-[10px] text-slate-400 mt-2 text-center"><i class="fa-solid fa-hand-pointer text-gold"></i> Click video to play/pause &bull; Captions positioned in safe zone</p>
                             </div>
 
                             <!-- Shorts Clip Chooser Grid -->
@@ -902,11 +914,12 @@
             uploadedVideoName: 'Masterclass_Finance_Strategy.mp4',
             uploadedVideoDurationSec: 2535, // 42m 15s default
             isVideoPlaying: false,
+            captionStyleColor: 'gold',
             viralShorts: [
-                { id: 'master', isMaster: true, title: 'Full Master Video (Silences Cut & Multi-Cam)', virality: 94, duration: '42:15', startTime: 0, endTime: 2535, hook: 'Complete Edited Episode', viewsEst: 'Full Cut' },
-                { id: 's1', isMaster: false, title: 'Stop Saving Paper Money (The Inflation Trap)', virality: 95, duration: '00:45', startTime: 0, endTime: 45, hook: 'Extreme High Hook', viewsEst: '1.2M+' },
-                { id: 's2', isMaster: false, title: '3 Tax Secrets Ultra-Rich People Use', virality: 92, duration: '00:58', startTime: 45, endTime: 103, hook: 'High Financial Curiosity', viewsEst: '850K+' },
-                { id: 's3', isMaster: false, title: 'How To Build a 7-Figure Portfolio in College', virality: 88, duration: '00:52', startTime: 103, endTime: 155, hook: 'Strong Student Relevance', viewsEst: '620K+' }
+                { id: 'master', isMaster: true, title: 'Full Master Video (Silences Cut & Multi-Cam)', virality: 94, duration: '42:15', startTime: 0, endTime: 2535, hook: 'Complete Edited Episode', viewsEst: 'Full Cut', captions: ['WELCOME BACK TO THE CHANNEL', 'TODAY WE BREAK DOWN REAL WEALTH', 'LET\'S DIVE STRAIGHT INTO IT'] },
+                { id: 's1', isMaster: false, title: 'Stop Saving Paper Money (The Inflation Trap)', virality: 95, duration: '00:45', startTime: 0, endTime: 45, hook: 'Extreme High Hook', viewsEst: '1.2M+', captions: ['STOP SAVING PAPER MONEY', 'INFLATION EATS YOUR CASH DAILY', 'OWN CASH-FLOWING ASSETS INSTEAD'] },
+                { id: 's2', isMaster: false, title: '3 Tax Secrets Ultra-Rich People Use', virality: 92, duration: '00:58', startTime: 45, endTime: 103, hook: 'High Financial Curiosity', viewsEst: '850K+', captions: ['THE ULTRA-RICH DON\'T PAY TAXES', 'HERE ARE THE 3 LEGAL ENTITIES', 'SAVE THIS BEFORE IT\'S GONE'] },
+                { id: 's3', isMaster: false, title: 'How To Build a 7-Figure Portfolio in College', virality: 88, duration: '00:52', startTime: 103, endTime: 155, hook: 'Strong Student Relevance', viewsEst: '620K+', captions: ['START BUILDING WEALTH IN COLLEGE', 'COMPOUND INTEREST IS YOUR EDGE', 'FOLLOW FOR DAILY PLAYBOOKS'] }
             ],
             selectedShortIndex: 1,
             // Publisher Queue
@@ -1402,28 +1415,59 @@
                 
                 document.getElementById('studio-progress-bar').style.width = `${pct}%`;
                 document.getElementById('phone-timecode-display').innerText = `${formatSeconds(elapsed)} / ${formatSeconds(clipDur)}`;
+
+                // Rotate dynamic viral caption lines every 3.5 seconds so it feels like real Reels subtitles
+                if (activeClip.captions && activeClip.captions.length > 0) {
+                    const lineIdx = Math.floor(elapsed / 3.5) % activeClip.captions.length;
+                    updateFormattedSubtitle(activeClip.captions[lineIdx]);
+                }
             };
+        }
+
+        function updateFormattedSubtitle(rawLine) {
+            const captionEl = document.getElementById('phone-caption-preview');
+            if (!captionEl || !rawLine) return;
+            const words = rawLine.split(' ');
+            const highlightColor = state.captionStyleColor === 'emerald' ? 'text-emeraldMoney' :
+                                   state.captionStyleColor === 'crimson' ? 'text-crimson' : 'text-gold';
+            if (words.length >= 3) {
+                const mid = Math.floor(words.length / 2);
+                words[mid] = `<span class="${highlightColor}">${words[mid]}</span>`;
+            }
+            captionEl.innerHTML = words.join(' ');
+        }
+
+        function updatePlayButtonVisibility(isPlaying) {
+            const centerControls = document.getElementById('studio-center-controls');
+            const icon = document.getElementById('studio-play-icon');
+            if (!centerControls || !icon) return;
+
+            if (isPlaying) {
+                icon.className = 'fa-solid fa-pause text-base';
+                centerControls.classList.add('opacity-0', 'group-hover:opacity-100');
+            } else {
+                icon.className = 'fa-solid fa-play text-base ml-0.5';
+                centerControls.classList.remove('opacity-0', 'group-hover:opacity-100');
+            }
         }
 
         function toggleStudioVideoPlay() {
             const videoEl = document.getElementById('studio-video-player');
-            const icon = document.getElementById('studio-play-icon');
             
             if (state.uploadedVideoUrl) {
                 if (videoEl.paused) {
                     videoEl.play();
                     state.isVideoPlaying = true;
-                    icon.className = 'fa-solid fa-pause';
+                    updatePlayButtonVisibility(true);
                 } else {
                     videoEl.pause();
                     state.isVideoPlaying = false;
-                    icon.className = 'fa-solid fa-play';
+                    updatePlayButtonVisibility(false);
                 }
             } else {
-                // Simulated toggle if no MP4 uploaded yet
                 state.isVideoPlaying = !state.isVideoPlaying;
-                icon.className = state.isVideoPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
-                showToast(state.isVideoPlaying ? "Playing AI Preview Simulation (Upload an MP4 to preview your real video)" : "Preview Paused", "info");
+                updatePlayButtonVisibility(state.isVideoPlaying);
+                showToast(state.isVideoPlaying ? "Playing Preview (Import an MP4 to preview your video)" : "Preview Paused", "info");
             }
         }
 
@@ -1467,40 +1511,44 @@
                         startTime: 0,
                         endTime: totalDur,
                         hook: 'Multi-Cam + Silence Removal Complete',
-                        viewsEst: 'Full Master'
+                        viewsEst: 'Full Master',
+                        captions: ['SILENCES REMOVED AUTOMATICALLY', 'MULTI-CAM ANGLES OPTIMIZED', 'READY FOR FULL YOUTUBE UPLOAD']
                     },
                     {
                         id: 's1_' + Date.now(),
                         isMaster: false,
-                        title: `Viral Hook #1: The Biggest Mistake in ${cleanBaseName.slice(0, 18)}`,
+                        title: `Hook #1: The #1 Mistake Holding You Back`,
                         virality: 96,
                         duration: formatSeconds(segLen),
                         startTime: t1,
                         endTime: Math.min(totalDur, t1 + segLen),
                         hook: '96% Retention Hook',
-                        viewsEst: '1.4M+'
+                        viewsEst: '1.4M+',
+                        captions: ['MOST PEOPLE MAKE THIS MISTAKE', 'HERE IS HOW TO FIX IT FAST', 'WATCH UNTIL THE VERY END']
                     },
                     {
                         id: 's2_' + Date.now(),
                         isMaster: false,
-                        title: `Viral Hook #2: Secret Strategy Breakdown (9:16)`,
+                        title: `Hook #2: The Strategy Nobody Talks About`,
                         virality: 92,
                         duration: formatSeconds(segLen),
                         startTime: t2,
                         endTime: Math.min(totalDur, t2 + segLen),
                         hook: '92% Shareability Trigger',
-                        viewsEst: '920K+'
+                        viewsEst: '920K+',
+                        captions: ['NOBODY TALKS ABOUT THIS STRATEGY', 'IT CHANGES EVERYTHING IN 2026', 'SAVE THIS REEL FOR LATER']
                     },
                     {
                         id: 's3_' + Date.now(),
                         isMaster: false,
-                        title: `Viral Hook #3: Rapid-Fire Takeaways`,
+                        title: `Hook #3: 3 Steps To Execute Today`,
                         virality: 88,
                         duration: formatSeconds(segLen),
                         startTime: t3,
                         endTime: Math.min(totalDur, t3 + segLen),
                         hook: '88% Comment Bait Hook',
-                        viewsEst: '680K+'
+                        viewsEst: '680K+',
+                        captions: ['STEP ONE: AUDIT YOUR NUMBERS', 'STEP TWO: AUTOMATE YOUR FLOW', 'COMMENT YOUR BIGGEST TAKEAWAY']
                     }
                 ];
 
@@ -1510,13 +1558,14 @@
                     generatedList.push({
                         id: 's4_' + Date.now(),
                         isMaster: false,
-                        title: `Viral Hook #4: Closing Power Move (15m+ Bonus Clip)`,
+                        title: `Hook #4: The Closing Power Move`,
                         virality: 89,
                         duration: formatSeconds(segLen),
                         startTime: t4,
                         endTime: Math.min(totalDur, t4 + segLen),
                         hook: '89% High Completion Rate',
-                        viewsEst: '740K+'
+                        viewsEst: '740K+',
+                        captions: ['THIS IS THE CLOSING POWER MOVE', 'APPLY THIS TODAY FOR RESULTS', 'FOLLOW FOR MORE BREAKDOWNS']
                     });
                 }
 
@@ -1531,44 +1580,35 @@
                 showToast(`Generated Full Edited Video + ${generatedList.length - 1} Viral Shorts (>= 85% Virality)!`, "success");
             }, 900);
         }
-
-        function renderStudioShorts() {
-            const container = document.getElementById('shorts-list-container');
-            container.innerHTML = state.viralShorts.map((short, idx) => {
-                const isSelected = idx === state.selectedShortIndex;
-                const badgeStyle = short.isMaster 
-                    ? 'bg-gold/20 text-gold border-gold/40' 
-                    : 'bg-emeraldMoney/20 text-emeraldMoney border-emeraldMoney/40';
-                const iconClass = short.isMaster ? 'fa-film text-gold' : 'fa-fire text-crimson';
-
-                return `
-                <div onclick="selectShortClip(${idx})" class="p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 ${isSelected ? 'bg-gold/15 border-gold shadow-lg' : 'bg-obsidian border-panelBorder hover:border-gold/40'}">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-lg bg-panelBorder/80 border border-panelBorder flex items-center justify-center font-bold text-xs shrink-0">
-                            <i class="fa-solid ${iconClass}"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-bold text-white leading-tight">${short.title}</h5>
-                            <span class="text-[10px] text-slate-400">Length: ${short.duration} &bull; ${short.hook}</span>
-                        </div>
-                    </div>
-                    <div class="text-right shrink-0">
-                        <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold border ${badgeStyle}">
-                            ${short.virality}% Viral
-                        </span>
-                    </div>
-                </div>
-                `;
-            }).join('');
-
-            // Update Phone Preview & Jump Video Player to Selected Clip Timestamp
+            // Update Phone/Widescreen Preview & Jump Video Player to Selected Clip Timestamp
             const activeShort = state.viralShorts[state.selectedShortIndex];
             if (activeShort) {
+                const frameWrapper = document.getElementById('studio-frame-wrapper');
+                const phoneNotch = document.getElementById('studio-phone-notch');
+
+                // Switch cleanly between 16:9 widescreen for Full Master Video and 9:16 vertical for Viral Shorts
+                if (activeShort.isMaster) {
+                    frameWrapper.style.width = '100%';
+                    frameWrapper.style.maxWidth = '380px';
+                    frameWrapper.style.height = '240px';
+                    frameWrapper.style.borderRadius = '20px';
+                    if (phoneNotch) phoneNotch.classList.add('hidden');
+                } else {
+                    frameWrapper.style.width = '270px';
+                    frameWrapper.style.maxWidth = '100%';
+                    frameWrapper.style.height = '480px';
+                    frameWrapper.style.borderRadius = '36px';
+                    if (phoneNotch) phoneNotch.classList.remove('hidden');
+                }
+
                 document.getElementById('current-preview-title').innerText = activeShort.title;
                 document.getElementById('current-preview-duration').innerText = `Duration: ${activeShort.duration}`;
                 document.getElementById('preview-virality-badge').innerText = `Virality Score: ${activeShort.virality}%`;
-                document.getElementById('phone-caption-preview').innerText = `"${activeShort.title.toUpperCase()}"`;
-                document.getElementById('phone-clip-badge').innerText = activeShort.isMaster ? '🎬 Full Master' : '🔥 Viral Short';
+                
+                const firstLine = (activeShort.captions && activeShort.captions[0]) ? activeShort.captions[0] : activeShort.title;
+                updateFormattedSubtitle(firstLine);
+
+                document.getElementById('phone-clip-badge').innerText = activeShort.isMaster ? '🎬 Full Master (16:9)' : '🔥 Viral Short (9:16)';
                 document.getElementById('phone-views-badge').innerHTML = `<i class="fa-solid fa-eye"></i> ${activeShort.viewsEst}`;
                 document.getElementById('phone-timecode-display').innerText = `00:00 / ${activeShort.duration}`;
 
@@ -1577,7 +1617,7 @@
                     videoEl.currentTime = activeShort.startTime || 0;
                     videoEl.play().then(() => {
                         state.isVideoPlaying = true;
-                        document.getElementById('studio-play-icon').className = 'fa-solid fa-pause';
+                        updatePlayButtonVisibility(true);
                     }).catch(() => {});
                 }
             }
@@ -1600,19 +1640,28 @@
             log.scrollTop = log.scrollHeight;
 
             // Visually apply requested style changes to the live 9:16 caption preview
-            const captionEl = document.getElementById('phone-caption-preview');
             const lower = txt.toLowerCase();
+            const activeShort = state.viralShorts[state.selectedShortIndex];
+            const currentLine = (activeShort && activeShort.captions && activeShort.captions[0]) ? activeShort.captions[0] : 'WATCH UNTIL THE END';
+
             if (lower.includes('gold')) {
-                captionEl.classList.remove('text-white', 'text-emeraldMoney', 'text-crimson');
-                captionEl.classList.add('text-gold');
+                state.captionStyleColor = 'gold';
+                updateFormattedSubtitle(currentLine);
             } else if (lower.includes('emerald') || lower.includes('green')) {
-                captionEl.classList.remove('text-white', 'text-gold', 'text-crimson');
-                captionEl.classList.add('text-emeraldMoney');
+                state.captionStyleColor = 'emerald';
+                updateFormattedSubtitle(currentLine);
             } else if (lower.includes('red') || lower.includes('crimson')) {
-                captionEl.classList.remove('text-white', 'text-gold', 'text-emeraldMoney');
-                captionEl.classList.add('text-crimson');
+                state.captionStyleColor = 'crimson';
+                updateFormattedSubtitle(currentLine);
+            } else if (lower.includes('hide caption') || lower.includes('no caption')) {
+                document.getElementById('phone-caption-container').classList.add('hidden');
+            } else if (lower.includes('show caption')) {
+                document.getElementById('phone-caption-container').classList.remove('hidden');
             } else {
-                captionEl.innerText = `"${txt.toUpperCase()}"`;
+                if (activeShort) {
+                    activeShort.captions = [txt.toUpperCase()];
+                }
+                updateFormattedSubtitle(txt.toUpperCase());
             }
 
             showToast("Video edit prompt applied to preview!", "success");
